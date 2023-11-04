@@ -86,7 +86,7 @@ class ArbolBinarioBusqueda:
         self.eliminar(clave)
 
     def remover(self,nodoActual):
-        if nodoActual.esHoja(): #hoja
+        if nodoActual.esHoja(): #hojas
             if nodoActual == nodoActual.padre.hijoIzquierdo:
                 nodoActual.padre.hijoIzquierdo = None
             else:
