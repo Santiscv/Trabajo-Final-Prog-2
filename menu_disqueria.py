@@ -1,4 +1,4 @@
-from videoclub import Socio, Pelicula, Videoclub
+from disqueria import Socio, Pelicula, Videoclub
 
 def menu():
     opcion = 0
