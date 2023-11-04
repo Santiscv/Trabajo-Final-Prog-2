@@ -118,3 +118,37 @@ class Videoclub:
         self.peliculas = video.peliculas
         pickle_file.close()
 
+class Disqueria:
+    def __init__(self):
+        self.album = ArbolBinarioBusqueda()
+        self.empleado = ArbolBinarioBusqueda()
+
+
+class Album:
+    def __init__(self, nombre_album, artista, genero_musical, categoria, stock):
+        self.nombre = nombre_album
+        self.artista = artista
+        self.genero_musical = genero_musical
+        self.categoria = categoria
+        self.stock = stock
+        self.precio_compra_tienda = 0
+        self.dinero_en_caja = 0
+        self.precio_venta_cliente = 0
+
+        
+class Empleados:
+    def __init__(self, nombre, dni, telefono, direccion, cargo, dinero_aportado):
+        self.nombre = nombre
+        self.dni = dni 
+        self.telefono = telefono
+        self.direccion = direccion
+        self.cargo = cargo
+        self:dinero_aportado = 0     
+
+
+
+
+
+
+
+
