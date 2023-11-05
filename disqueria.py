@@ -1,13 +1,132 @@
 import pickle #libreria para guardar y recuperar informacion
-from Arbol_binario import ArbolBinarioBusqueda                           #abb = Arbol binario de busqueda.
+from Arbol_binario import ArbolBinarioBusqueda #abb = Arbol binario de busqueda.
 
-class Socio():
-    def __init__(self,dni,nombre,telefono,domicilio):
-        self.dni =dni
-        self.nombre = nombre
-        self.telefono = telefono
-        self.domicilio = domicilio
+class Disqueria:
+    def __init__(self,albumes,empleados):
+        self.albumes = ArbolBinarioBusqueda()
+        self.empleados = ArbolBinarioBusqueda()
+    
+    def contiene_album(self,nombre)->bool:
+        return nombre in self.albumes
+    
+    def buscar_album(self,nombre)->"Album":
+        if nombre in self.albumes:
+            return self.albumes[nombre] #hay que cambiar porque lo almacenaba en una lista, luego nos fijamos como se almacena
+        else:
+            return None
         
+    def alta_nuevo_album(self,album):
+        self.albumes[album.nombre] = album #igual que aca
+        
+    def baja_album(self,nombre): #esta es una opcion
+        self.albumes.eliminar(nombre)
+    
+    def eliminar_album(self,nombre)->None: #esta es otra, despues nos fijamos cual es apropiada
+        album = self.buscar_album(nombre)
+        self.albumes.remove(album)
+    
+    def mostrar_albumes(self):
+        for album in self.albumes:
+            print (album)
+            
+            
+            
+    ############ empleado ##########
+    
+    
+    def alta_nuevo_empleado(self,empleado)->None:
+        self.empleados.append(empleado)
+        
+    def baja_empleado(self,dni)->None:
+        empleado = self.buscar_empleado(dni)
+        self.empleados.remove(dni)
+    
+    def eliminar_empleado(self,dni)->None: #esta es otra, despues nos fijamos cual es apropiada
+        empleado = self.buscar_empleado(dni)
+        self.empleados.remove(empleado)   
+                    
+    def contiene_empleado(self,dni):
+        esta = False
+        for empleado in self.empleados:
+            if empleado.dni == dni:
+                esta = True
+        return esta
+    
+    def buscar_empleado(self,dni)->"Empleados":
+        devolver = None
+        for empleado in self.empleados:
+            if empleado.dni == dni:
+                devolver = empleado
+        return devolver
+    
+    def mostrar_empleados(self):
+        for empleado in self.empleados:
+            print (empleado)    
+    
+        
+        
+    def alquilar_pelicula(self,nombre,dni):
+        for pelicula in self.peliculas:
+            if pelicula.nombre == nombre and pelicula.alquilada == None:
+                pelicula.alquilada = dni
+                
+    def devolver_pelicula(self,nombre):
+        for pelicula in self.peliculas:
+            if pelicula.nombre == nombre and pelicula.alquilada != None:
+                pelicula.alquilada = None
+         
+    def guardar_archivo(self,archivo="disqueria.pickle"):
+        pickle_file = open(archivo, 'wb')
+        pickle.dump(self, pickle_file)
+        pickle_file.close()
+
+    def leer_archivo(self,archivo="disqueria.pickle"):
+        pickle_file = open(archivo,'rb')
+        disqueria = pickle.load(pickle_file)
+        self.albumes = disqueria.albumes
+        self.empleados = disqueria.empleados
+        pickle_file.close()
+
+class Album:
+    def __init__(self, nombre_album, artista, genero_musical, categoria, stock):
+        self.nombre = nombre_album
+        self.artista = artista
+        self.genero_musical = genero_musical
+        self.categoria = categoria
+        self.stock = stock
+        self.precio_compra_tienda = 0
+        self.precio_venta_cliente = 0
+        self.dinero_en_caja = 0
+
+    def __lt__(self, other): # x<y llama x.__lt__(y)
+        return self.nombre<other.nombre
+    def __le__(self, other): # x<=y llama x.__le__(y)
+        return self.nombre<=other.nombre
+    def __eq__(self, other): # x==y llama x.__eq__(y)
+        return self.nombre==other.nombre
+    def __ne__(self, other): # x!=y llama x.__ne__(y)
+        return self.nombre!=other.nombre
+    def __gt__(self, other): # x>y llama x.__gt__(y)
+        return self.nombre>other.nombre
+    def __ge__(self, other): # x>=y llama x.__ge__(y)
+        return self.nombre>=other.nombre
+            
+        
+
+    def __str__(self):
+        return "Album: {0}\n: {1}\Artista: {2}\Genero Musical: {3}\n Categoria: {4}\n: {5}\Stock: {6}\Precio para la tienda: {7}\n Precio para el cliente: {8}\n: {9}\Dinero en caja:\n" \
+            .format(self.nombre,self.artista,self.genero_musical,self.categoria,  self.stock, self.precio_compra_tienda,self.precio_venta_cliente,self.dinero_en_caja)          
+            
+            
+class Empleados:
+    def __init__(self, nombre, dni, telefono, direccion, cargo, dinero_aportado):
+        self.nombre = nombre
+        self.dni = dni 
+        self.telefono = telefono
+        self.direccion = direccion
+        self.cargo = cargo
+        self.dinero_aportado = 0     
+
     def __lt__(self, other): # x<y llama x.__lt__(y)
         return self.dni<other.dni
     def __le__(self, other): # x<=y llama x.__le__(y)
@@ -22,132 +141,9 @@ class Socio():
         return self.dni>=other.dni
 
     def __str__(self):
-        return "DNI: {0}\nNombre: {1}\nTelefono: {2}\nDomicilio: {3}\n" \
-            .format(self.dni,self.nombre,self.telefono,self.domicilio)
-
-class Pelicula():
-    def __init__(self,titulo,genero,anio):
-        self.titulo = titulo
-        self.genero = genero
-        self.anio = anio
-        self.alquilada = None
-    
-    def __str__(self):
-        return "Titulo: {0}\nGenero: {1}\nAño: {2}\nAlquilada: {3}" \
-            .format(self.titulo,self.genero,self.anio,self.alquilada)
-        #return f"Titulo: {self.titulo}\nGenero: {self.genero}\nAño: {self.anio}\nAlquilada: {self.alquilada}"
-
-    def esta_alquilada(self):
-        return self.alquilada != None
-    
-    def __lt__(self, other): # x<y llama x.__lt__(y)
-        return self.titulo<other.titulo
-    def __le__(self, other): # x<=y llama x.__le__(y)
-        return self.titulo<=other.titulo
-    def __eq__(self, other): # x==y llama x.__eq__(y)
-        return self.titulo==other.titulo
-    def __ne__(self, other): # x!=y llama x.__ne__(y)
-        return self.titulo!=other.titulo
-    def __gt__(self, other): # x>y llama x.__gt__(y)
-        return self.titulo>other.titulo
-    def __ge__(self, other): # x>=y llama x.__ge__(y)
-        return self.titulo>=other.titulo
-
-class Videoclub:
-    def __init__(self):
-        self.socios = ArbolBinarioBusqueda()
-        self.peliculas = []
-
-    def contiene_socio(self,dni)->bool:
-        return dni in self.socios
-    
-    def buscar_socio(self,dni)->"Socio":
-        if dni in self.socios:
-            return self.socios[dni]
-        else:
-            return None
-        
-    def alta_nuevo_socio(self,socio):
-        self.socios[socio.dni] = socio
-        
-    def baja_socio(self,dni):
-        self.socios.eliminar(dni)
-    
-    def mostrar_socios(self):
-        for socio in self.socios:
-            print (socio)
-    
-    def contiene_pelicula(self,titulo):
-        esta = False
-        for pelicula in self.peliculas:
-            if pelicula.titulo == titulo:
-                esta = True
-        return esta
-    def buscar_pelicula(self,titulo)->"Pelicula":
-        devolver = None
-        for pelicula in self.peliculas:
-            if pelicula.titulo == titulo:
-                devolver = pelicula
-        return devolver
-    def alta_nueva_pelicula(self,pelicula)->None:
-        self.peliculas.append(pelicula)
-        
-    def baja_pelicula(self,titulo)->None:
-        pelicula = self.buscar_pelicula(titulo)
-        self.peliculas.remove(pelicula)
-        
-    def alquilar_pelicula(self,titulo,dni):
-        for pelicula in self.peliculas:
-            if pelicula.titulo == titulo and pelicula.alquilada == None:
-                pelicula.alquilada = dni
-                
-    def devolver_pelicula(self,titulo):
-        for pelicula in self.peliculas:
-            if pelicula.titulo == titulo and pelicula.alquilada != None:
-                pelicula.alquilada = None
-         
-    def guardar_archivo(self,archivo="video.pickle"):
-        pickle_file = open(archivo, 'wb')
-        pickle.dump(self, pickle_file)
-        pickle_file.close()
-
-    def leer_archivo(self,archivo="video.pickle"):
-        pickle_file = open(archivo,'rb')
-        video = pickle.load(pickle_file)
-        self.socios = video.socios
-        self.peliculas = video.peliculas
-        pickle_file.close()
-
-class Disqueria:
-    def __init__(self):
-        self.album = ArbolBinarioBusqueda()
-        self.empleado = ArbolBinarioBusqueda()
-
-
-class Album:
-    def __init__(self, nombre_album, artista, genero_musical, categoria, stock):
-        self.nombre = nombre_album
-        self.artista = artista
-        self.genero_musical = genero_musical
-        self.categoria = categoria
-        self.stock = stock
-        self.precio_compra_tienda = 0
-        self.dinero_en_caja = 0
-        self.precio_venta_cliente = 0
-
-        
-class Empleados:
-    def __init__(self, nombre, dni, telefono, direccion, cargo, dinero_aportado):
-        self.nombre = nombre
-        self.dni = dni 
-        self.telefono = telefono
-        self.direccion = direccion
-        self.cargo = cargo
-        self:dinero_aportado = 0     
-
-
-
-
+        return "nombre: {0}\DNI: {1}\Telefono: {2}\Direccion: {3}\Cargo: {4}\Dinero aportado: {5}" \
+            .format(self.nombre, self.dni, self.telefono,self.direccion,self.cargo, self.dinero_aportado)
+        #return f"nombre: {self.nombre}\nGenero: {self.genero}\nAño: {self.anio}\nAlquilada: {self.alquilada}"
 
 
 
