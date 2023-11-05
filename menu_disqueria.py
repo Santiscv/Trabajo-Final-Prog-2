@@ -1,84 +1,115 @@
-from disqueria import Socio, Pelicula, Videoclub
+from disqueria import Disqueria, Album, Empleados 
 
 def menu():
     opcion = 0
-    while opcion < 1 or opcion > 9:
-        print("--")
-        print("(1) Dar de alta nuevo socio")
-        print("(2) Dar de baja socio")
-        print("(3) Dar de alta nueva pelicula")
-        print("(4) Dar de baja pelicula")
-        print("(5) Alquilar película")
-        print("(6) Devolver película")
-        print("(7) Guardar archivo")
-        print("(8) Leer archivo")
-        print("(9) Salir")
-        # consultar pelicula - me devuelve la informacion de la pelicula
-        print("--")
+    while opcion < 1 or opcion > 13:
+        print("------ Menú Disqueria ------")
+        print("(1)  Dar de alta nuevo Album")
+        print("(2)  Dar de baja Album")
+        print("(3)  Buscar Album")
+        print("(4)  Modificar Album")     #pensar bien la logica
+        print("(5)  Listar Albums")       # pensar bien la logica (creo que se usa __iter__)
+        print("(6)  Dar de alta nuevo Empleado")
+        print("(7)  Dar de baja Empleado")
+        print("(8)  Modificar Empleado")
+        print("(9)  Buscar Empleado")
+        print("(10) Listar Empleados")
+        print("(11) Guardar archivo")
+        print("(12) Leer archivo")
+        print("(13) Salir")
+        print("---------------------------")
         opcion = int(input("Elija una opcion: "))
-        print("--")
+        print("---------------------------")
     return opcion
 
-def run(videoclub):
+#mejorar todo esta logica en base a Disqueria, Album y Empleados
+
+def run(disqueria):    
     opcion = 0
-    while opcion != 9:
+    while opcion != 13:    #Mientras que sea distinto de 13 --->(salir)
         opcion = menu()
-        if opcion == 1:
-            nombre = input("Nombre: ")
-            dni = input("Dni: ")
-            telefono = input("Telefono: ")
-            dire = input("Dirección: ")
-            socio = Socio(dni,nombre,telefono,dire)
-            if videoclub.contiene_socio(socio.dni):
-                print("El socio ya existe")
+        if opcion == 1:     #dar de alta un album
+            nombre_album = input("Nombre del album: ")
+            artista = input("Nombre del Artista: ")                     
+            genero_musical = input("Genero musical: ")                         
+            categoria = input("Categoria: ")                             
+            stock = input("Cant de producto: ")
+            precio_de_compra = float(input("Precio de compra: "))
+            precio_venta_cliente = float(input("Precio de venta: "))
+            album = Album(nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
+#completar
+            if disqueria.contiene_album(Album.nombre): 
+                print("El Album ya existe.")
             else:
-                videoclub.alta_nuevo_socio(socio)
-                print("Socio Agregado")
-        if opcion == 2:
-            dni = input("Dni:")
-            if videoclub.contiene_socio(dni):
-                print("El socio no existe")
+                disqueria.alta_nuevo_album(album)        
+                print("Album Agregado")
+
+        if opcion == 2: # dar de baja un album
+            nombre = input("Nombre del album:")
+            if disqueria.contiene_album(nombre):
+                print("El Album no existe")
             else:
-                videoclub.baja_socio(socio)
-                print("Socio dado de baja")
-        if opcion == 3:
-            titulo = input("Titulo: ")
-            genero = input("Genero: ")
-            anio = input("Anio: ")
-            peli = Pelicula(titulo,genero,anio)
-            if videoclub.contiene_pelicula(peli.titulo):
-                print("La peli ya existe")
+                disqueria.Eliminar_Album(album) #elegi una de las opciones como para agregarle alguna funcionalidad nada mas..(despues decidimos con cual nos quedamos)
+                print("Album dado de baja")
+
+        if opcion == 3: #buscar album
+            nombreA = input("Nombre del album: ")
+            if disqueria.contiene_album(nombreA):               #ver bien
+                disqueria.buscar_album(nombreA)                 #ver bien
             else:
-                videoclub.alta_nueva_pelicula(peli)
-                print("Pelicula agregada")
-        if opcion == 4:
-            dni = input("Titulo:")
-            if videoclub.contiene_pelicula(dni):
-                print("La pelicula no existe")
+                print("No se encuentra el album")
+
+        if opcion == 4:  #modificar album
+            pass
+
+        if opcion == 5: #listar album
+           disqueria.mostrar_albumes()
+
+        if opcion == 6: #dar de alta empleado
+            nombreE= input("Nombre del empleado: ")
+            dni= input("DNI del empleado: ")
+            telefono= input("Telefono del empleado: ")
+            direccion = input("Direccion del empleado: ")
+            cargo= input("Cargo asignado: ")
+            dineroAportado = input("")               #podriamos inicializarlo en 0 desde el init ?
+            empleado = Empleados(nombreE, dni, telefono, direccion, cargo, dineroAportado)
+            
+            if disqueria.contiene_empleado(empleado.nombre):
+                print("El empleado ya existe.")
             else:
-                videoclub.baja_pelicula(socio)
-                print("Pelicula ha sido dada de baja")
-        if opcion == 5:
-            titulo = input("Titulo: ")
-            dni = input("DNI socio: ")
-            if videoclub.contiene_pelicula() and videoclub.contiene_socio():
-                videoclub.alquilar_pelicula(titulo,dni)
+                disqueria.AgregarEmpleado(empleado)
+                print("Empleado dado de alta.")
+
+
+        if opcion == 7: #dar de baja empleado
+            nombreE = input("Nombre del empleado: ")
+            if disqueria.contiene_empleado(nombreE):
+                disqueria.EliminarEmpleado(empleado) #ver bien..
+                print("Empleado dado de baja.")
             else:
-                print("No se pudo alquilar la pelicula")
-        if opcion == 6:
-            titulo = input("Titulo: ")
-            if not videoclub.contiene_pelicula(titulo):
-                print("La pelicula no existe")
+                print("El empleado no existe.")
+        
+        if opcion == 8: #modificar empleado
+            pass
+
+        if opcion == 9: #buscar empleado
+            nombreE = input("Nombre del empleado: ")
+            if disqueria.coontiene_empleado(nombreE):               #ver bien
+                disqueria.buscar_empleado(nombreE)                 #ver bien
             else:
-                videoclub.devolver_pelicula(titulo)
-                print("Pelicula ha sido devuelta")
-        if opcion == 7:
-            videoclub.guardar_archivo()
-        if opcion == 8:
-            videoclub.leer_archivo()
-        print("Socios: ", len(videoclub.socios))
-        print("Peliculas: ", len(videoclub.peliculas))
+                print("No se encuentra el empleado")
+
+        if opcion == 10: #listar empleados
+            disqueria.mostrar_empleados()
+
+        if opcion == 11: #guardar archivo
+            disqueria.guardar_archivo()
+
+        if opcion == 12: # leer archivo
+            disqueria.leer_archivo()
+        print("Albums: ")          #ver bien 
+        print("Elmpleados: ")      #ver bien
 
 if __name__ == "__main__":
-    videoclub = Videoclub()
-    run(videoclub)
+    disqueria = Disqueria()
+    run(disqueria)
