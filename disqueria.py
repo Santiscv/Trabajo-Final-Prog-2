@@ -2,7 +2,7 @@ import pickle #libreria para guardar y recuperar informacion
 from Arbol_binario import ArbolBinarioBusqueda #abb = Arbol binario de busqueda.
 
 class Disqueria:
-    def __init__(self,albumes,empleados):
+    def __init__(self):
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
     
