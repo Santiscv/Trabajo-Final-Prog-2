@@ -29,8 +29,10 @@ class Disqueria:
         for album in self.albumes:
             print (album)
             
-            
-            
+    def modificar_album(self):    
+        pass   
+    def listar_album(self):
+        pass         
     ############ empleado ##########
     
     
@@ -64,7 +66,20 @@ class Disqueria:
             print (empleado)    
     
         
+    def modificar_empleado(self, dni, nuevo_nombre,nuevo_telefono, nueva_direccion, nuevo_cargo, nuevo_dinero_aportado):
+        if self.arbol_empleado[dni] == self.arbol_empleado.buscar_empleado(dni):
+            self.arbol_empleado.nombre = nuevo_nombre
+            self.arbol_empleado.telefono = nuevo_telefono
+            self.arbol_empleado.direccion = nueva_direccion
+            self.arbol_empleado.cargo = nuevo_cargo
+            self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
+            
+            
         
+    def listar_empleado(self):
+        self.arbol_empleado.inorden() #provisorio
+
+
     def alquilar_pelicula(self,nombre,dni):
         for pelicula in self.peliculas:
             if pelicula.nombre == nombre and pelicula.alquilada == None:
@@ -110,7 +125,7 @@ class Album:
         return self.nombre>other.nombre
     def __ge__(self, other): # x>=y llama x.__ge__(y)
         return self.nombre>=other.nombre
-            
+          
         
 
     def __str__(self):
