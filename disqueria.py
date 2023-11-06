@@ -9,21 +9,20 @@ class Disqueria:
     def contiene_album(self,nombre)->bool:
         return nombre in self.albumes
     
-    def buscar_album(self,nombre)->"Album":
-        if nombre in self.albumes:
-            return self.albumes[nombre] #hay que cambiar porque lo almacenaba en una lista, luego nos fijamos como se almacena
+    def buscar_album(self,artista,id)->"Album":
+        if artista in self.arbol_album:
+            return self.arbol_album[artista]
+        elif id in self.arbol_album:
+            return self.arbol_album[id]
         else:
             return None
         
     def alta_nuevo_album(self,album):
-        self.albumes[album.nombre] = album #igual que aca
+        self.arbol_album[album.nombre] = album #igual que aca
         
-    def baja_album(self,nombre): #esta es una opcion
-        self.albumes.eliminar(nombre)
+    def baja_album(self, id): #esta es una opcion
+        self.arbol_album.eliminar(id)
     
-    def eliminar_album(self,nombre)->None: #esta es otra, despues nos fijamos cual es apropiada
-        album = self.buscar_album(nombre)
-        self.albumes.remove(album)
     
     def mostrar_albumes(self):
         for album in self.albumes:
@@ -36,14 +35,14 @@ class Disqueria:
     ############ empleado ##########
     
     
-    def alta_nuevo_empleado(self,empleado)->None:
-        self.empleados.append(empleado)
+    def alta_nuevo_empleado(self, empleado)->None:
+        self.arbol_empleado[empleado.dni] = empleado
         
     def baja_empleado(self,dni)->None:
         empleado = self.buscar_empleado(dni)
-        self.empleados.remove(dni)
+        self.empleados.eliminar(dni)
     
-    def eliminar_empleado(self,dni)->None: #esta es otra, despues nos fijamos cual es apropiada
+    def eliminar_empleado(self,dni)->None: 
         empleado = self.buscar_empleado(dni)
         self.empleados.remove(empleado)   
                     
@@ -54,12 +53,12 @@ class Disqueria:
                 esta = True
         return esta
     
-    def buscar_empleado(self,dni)->"Empleados":
-        devolver = None
-        for empleado in self.empleados:
-            if empleado.dni == dni:
-                devolver = empleado
-        return devolver
+    def buscar_empleado(self, dni)->"Empleados":
+        if dni in self.arbol_empleado:
+            return self.arbol_empleado[dni]
+        else:
+            return None
+    
     
     def mostrar_empleados(self):
         for empleado in self.empleados:
@@ -103,7 +102,8 @@ class Disqueria:
         pickle_file.close()
 
 class Album:
-    def __init__(self, nombre_album, artista, genero_musical, categoria, stock):
+    def __init__(self, id,nombre_album, artista, genero_musical, categoria, stock):
+        self.id=id
         self.nombre = nombre_album
         self.artista = artista
         self.genero_musical = genero_musical
@@ -158,8 +158,6 @@ class Empleados:
     def __str__(self):
         return "nombre: {0}\DNI: {1}\Telefono: {2}\Direccion: {3}\Cargo: {4}\Dinero aportado: {5}" \
             .format(self.nombre, self.dni, self.telefono,self.direccion,self.cargo, self.dinero_aportado)
-        #return f"nombre: {self.nombre}\nGenero: {self.genero}\nAño: {self.anio}\nAlquilada: {self.alquilada}"
-
 
 
 
