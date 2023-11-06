@@ -18,12 +18,9 @@ class Disqueria:
     def alta_nuevo_album(self,album):
         self.albumes[album.nombre] = album #igual que aca
         
-    def baja_album(self,nombre): #esta es una opcion
-        self.albumes.eliminar(nombre)
+    def baja_album(self, id): #esta es una opcion
+        self.arbol_album.eliminar(id)
     
-    def eliminar_album(self,nombre)->None: #esta es otra, despues nos fijamos cual es apropiada
-        album = self.buscar_album(nombre)
-        self.albumes.remove(album)
     
     def mostrar_albumes(self):
         for album in self.albumes:
@@ -34,8 +31,8 @@ class Disqueria:
     ############ empleado ##########
     
     
-    def alta_nuevo_empleado(self,empleado)->None:
-        self.empleados.append(empleado)
+    def alta_nuevo_empleado(self, empleado)->None:
+        self.arbol_empleado[arbol_empleado.dni] = empleado
         
     def baja_empleado(self,dni)->None:
         empleado = self.buscar_empleado(dni)
@@ -52,12 +49,12 @@ class Disqueria:
                 esta = True
         return esta
     
-    def buscar_empleado(self,dni)->"Empleados":
-        devolver = None
-        for empleado in self.empleados:
-            if empleado.dni == dni:
-                devolver = empleado
-        return devolver
+    def buscar_empleado(self, dni)->"Empleados":
+        if dni in self.arbol_empleado:
+            return self.arbol_empleado[dni]
+        else:
+            return None
+    
     
     def mostrar_empleados(self):
         for empleado in self.empleados:
