@@ -3,8 +3,8 @@ from Arbol_binario import ArbolBinarioBusqueda #abb = Arbol binario de busqueda.
 
 class Disqueria:
     def __init__(self,albumes,empleados):
-        self.albumes = ArbolBinarioBusqueda()
-        self.empleados = ArbolBinarioBusqueda()
+        self.arbol_album = ArbolBinarioBusqueda()
+        self.arbol_empleado = ArbolBinarioBusqueda()
     
     def contiene_album(self,nombre)->bool:
         return nombre in self.albumes
