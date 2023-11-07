@@ -29,13 +29,12 @@ class Disqueria:
             print (album)
             
     def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):    
-        if self.arbol_empleado[id] == self.arbol_empleado.buscar_empleado(id): 
+        if self.arbol_album[id] == self.arbol_album(id): 
          self.arbol_album.nombre = nuevo_nombre
          self.arbol_album.artista = nuevo_artista
          self.arbol_album.genero = nuevo_genero
          self.arbol_album.categoria = nueva_categoria
          self.arbol_album.stock = nuevo_stock
-         
     def listar_album(self):
         pass         
     ############ empleado ##########
@@ -44,13 +43,10 @@ class Disqueria:
     def alta_nuevo_empleado(self, empleado)->None:
         self.arbol_empleado[empleado.dni] = empleado
         
-    def baja_empleado(self,dni)->None:
-        empleado = self.buscar_empleado(dni)
-        self.empleados.eliminar(dni)
     
     def eliminar_empleado(self,dni)->None: 
         empleado = self.buscar_empleado(dni)
-        self.empleados.remove(empleado)   
+        self.empleados.eliminar(empleado)   #preguntar que diferencia es con el remove
                     
     def contiene_empleado(self,dni):
         esta = False
