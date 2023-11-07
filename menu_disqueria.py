@@ -130,8 +130,6 @@ def run(disqueria):
 
         if opcion == 12: # leer archivo
             disqueria.leer_archivo()
-        print("Albums: ")          #ver bien 
-        print("Elmpleados: ")      #ver bien
 
 if __name__ == "__main__":
     disqueria = Disqueria()
