@@ -6,8 +6,8 @@ class Disqueria:
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
     
-    def contiene_album(self,nombre)->bool:
-        return nombre in self.albumes
+    def contiene_album(self,id)->bool:
+        return id in self.arbol_album
     
     def buscar_album(self,artista,id)->"Album":
         if artista in self.arbol_album:
@@ -20,12 +20,12 @@ class Disqueria:
     def alta_nuevo_album(self,album):
         self.arbol_album[album.nombre] = album #igual que aca
         
-    def baja_album(self, id): #esta es una opcion
+    def eliminar_album(self, id): #esta es una opcion
         self.arbol_album.eliminar(id)
     
     
     def mostrar_albumes(self):
-        for album in self.albumes:
+        for album in self.arbol_album:
             print (album)
             
     def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):    
