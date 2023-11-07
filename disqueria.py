@@ -9,10 +9,8 @@ class Disqueria:
     def contiene_album(self,id)->bool:
         return id in self.arbol_album
     
-    def buscar_album(self,artista,id)->"Album":
-        if artista in self.arbol_album:
-            return self.arbol_album[artista]
-        elif id in self.arbol_album:
+    def buscar_album(self,id)->"Album":
+        if id in self.arbol_album:
             return self.arbol_album[id]
         else:
             return None
@@ -25,8 +23,7 @@ class Disqueria:
     
     
     def mostrar_albumes(self):
-        for album in self.arbol_album:
-            print (album)
+        self.arbol_album.inorden() #provisorio
             
     def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):    
         if self.arbol_album[id] == self.arbol_album(id): 
@@ -35,8 +32,7 @@ class Disqueria:
          self.arbol_album.genero = nuevo_genero
          self.arbol_album.categoria = nueva_categoria
          self.arbol_album.stock = nuevo_stock
-    def listar_album(self):
-        pass         
+        
     ############ empleado ##########
     
     
@@ -46,14 +42,10 @@ class Disqueria:
     
     def eliminar_empleado(self,dni)->None: 
         empleado = self.buscar_empleado(dni)
-        self.empleados.eliminar(empleado)   #preguntar que diferencia es con el remove
+        self.arbol_empleado.eliminar(empleado)   
                     
-    def contiene_empleado(self,dni):
-        esta = False
-        for empleado in self.empleados:
-            if empleado.dni == dni:
-                esta = True
-        return esta
+    def contiene_empleado(self,dni)->bool:
+        return dni in self.arbol_empleado
     
     def buscar_empleado(self, dni)->"Empleados":
         if dni in self.arbol_empleado:
@@ -63,8 +55,7 @@ class Disqueria:
     
     
     def mostrar_empleados(self):
-        for empleado in self.empleados:
-            print (empleado)    
+        self.arbol_empleado.inorden() #provisorio
     
         
     def modificar_empleado(self, dni, nuevo_nombre,nuevo_telefono, nueva_direccion, nuevo_cargo, nuevo_dinero_aportado):
@@ -74,11 +65,6 @@ class Disqueria:
             self.arbol_empleado.direccion = nueva_direccion
             self.arbol_empleado.cargo = nuevo_cargo
             self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
-            
-            
-        
-    def listar_empleado(self):
-        self.arbol_empleado.inorden() #provisorio
 
 
     def alquilar_pelicula(self,nombre,dni):
