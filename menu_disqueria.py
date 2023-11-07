@@ -37,30 +37,53 @@ def run(disqueria):
             precio_de_compra = float(input("Precio de compra: "))
             precio_venta_cliente = float(input("Precio de venta: "))
             album = Album(nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
-#completar
-            if disqueria.contiene_album(Album.nombre): 
+
+            if disqueria.contiene_album(album.nombre): #deberia ser album.nombre_album?
                 print("El Album ya existe.")
             else:
                 disqueria.alta_nuevo_album(album)        
                 print("Album Agregado")
 
         if opcion == 2: # dar de baja un album
-            nombre = input("Nombre del album:")
-            if disqueria.contiene_album(nombre):
+            id = input("Inserte el ID del album: ")
+            if disqueria.contiene_album(id):
                 print("El Album no existe")
             else:
-                disqueria.Eliminar_Album(album) #elegi una de las opciones como para agregarle alguna funcionalidad nada mas..(despues decidimos con cual nos quedamos)
+                disqueria.eliminar_album(id)
                 print("Album dado de baja")
 
         if opcion == 3: #buscar album
-            nombreA = input("Nombre del album: ")
-            if disqueria.contiene_album(nombreA):               #ver bien
-                disqueria.buscar_album(nombreA)                 #ver bien
+            id_album = input("Inserte el ID del album: ")
+            if disqueria.contiene_album(id):               #ver bien
+                disqueria.buscar_album(id)                 #ver bien
             else:
                 print("No se encuentra el album")
 
         if opcion == 4:  #modificar album
-            pass
+            id_album = input("Inserte el ID del album a modificar: ")
+            if disqueria.contiene_album(nombre_album):
+                nuevo_nombre = input("Nuevo nombre del álbum: ")
+                nuevo_artista = input("Nuevo nombre del artista: ")
+                nuevo_genero_musical = input("Nuevo género musical: ")
+                nueva_categoria = input("Nueva categoría: ")
+                nuevo_stock = input("Nueva cantidad de producto: ")
+                nuevo_precio_compra = float(input("Nuevo precio de compra: "))
+                nuevo_precio_venta = float(input("Nuevo precio de venta: "))
+                
+
+                album = disqueria.buscar_album(nombre_album)
+
+                album.nombre = nuevo_nombre
+                album.artista = nuevo_artista
+                album.genero_musical = nuevo_genero_musical
+                album.categoria = nueva_categoria
+                album.stock = nuevo_stock
+                album.precio_compra_tienda = nuevo_precio_compra
+                album.precio_venta_cliente = nuevo_precio_venta
+
+                print("Álbum modificado con éxito.")
+            else:
+                print("El álbum no existe en la disquería.")
 
         if opcion == 5: #listar album
            disqueria.mostrar_albumes()
@@ -82,9 +105,9 @@ def run(disqueria):
 
 
         if opcion == 7: #dar de baja empleado
-            nombreE = input("Nombre del empleado: ")
-            if disqueria.contiene_empleado(nombreE):
-                disqueria.EliminarEmpleado(empleado) #ver bien..
+            dni_empleado = input("Inserte el dni del empleado: ")
+            if disqueria.contiene_empleado(dni):
+                disqueria.eliminare_mpleado(dni_empleado)
                 print("Empleado dado de baja.")
             else:
                 print("El empleado no existe.")
@@ -93,9 +116,9 @@ def run(disqueria):
             pass
 
         if opcion == 9: #buscar empleado
-            nombreE = input("Nombre del empleado: ")
-            if disqueria.coontiene_empleado(nombreE):               #ver bien
-                disqueria.buscar_empleado(nombreE)                 #ver bien
+            dni_empleado = input("Insertar el dni del empleado: ")
+            if disqueria.contiene_empleado(dni_empleado):               #ver bien
+                disqueria.buscar_empleado(dni_empleado)                 #ver bien
             else:
                 print("No se encuentra el empleado")
 
