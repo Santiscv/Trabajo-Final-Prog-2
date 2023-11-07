@@ -37,7 +37,7 @@ def run(disqueria):
             stock = input("Cant de producto: ")
             precio_de_compra = float(input("Precio de compra: "))
             precio_venta_cliente = float(input("Precio de venta: "))
-            album = Album(nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
+            album = Album(id_album, nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
 #completar
             if disqueria.contiene_album(Album.nombre): 
                 print("El Album ya existe.")
