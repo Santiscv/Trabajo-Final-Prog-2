@@ -35,6 +35,7 @@ class Disqueria:
          self.arbol_album.genero = nuevo_genero
          self.arbol_album.categoria = nueva_categoria
          self.arbol_album.stock = nuevo_stock
+         
     def listar_album(self):
         pass         
     ############ empleado ##########
