@@ -7,7 +7,7 @@ def menu():
         print("(1)  Dar de alta nuevo Album")
         print("(2)  Dar de baja Album")
         print("(3)  Buscar Album")
-        print("(4)  Modificar Album")     #pensar bien la logica
+        print("(4)  Modificar Album")    
         print("(5)  Listar Albums")       # pensar bien la logica (creo que se usa __iter__)
         print("(6)  Dar de alta nuevo Empleado")
         print("(7)  Dar de baja Empleado")
@@ -22,14 +22,14 @@ def menu():
         print("---------------------------")
     return opcion
 
-#mejorar todo esta logica en base a Disqueria, Album y Empleados
+
 
 def run(disqueria):    
     opcion = 0
     while opcion != 13:    #Mientras que sea distinto de 13 =--->(salir)
         opcion = menu()
         if opcion == 1:
-            id_album = input("ID del album: ")     #dar de alta un album
+            id_album = input("ID del album: ")    #dar de alta un album
             nombre_album = input("Nombre del album: ")
             artista = input("Nombre del Artista: ")                     
             genero_musical = input("Genero musical: ")                         
@@ -38,25 +38,26 @@ def run(disqueria):
             precio_de_compra = float(input("Precio de compra: "))
             precio_venta_cliente = float(input("Precio de venta: "))
             album = Album(id_album, nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
-#completar
+
             if disqueria.contiene_album(album.nombre): 
                 print("El Album ya existe.")
             else:
                 disqueria.alta_nuevo_album(album)        
                 print("Album Agregado")
 
-        if opcion == 2: # dar de baja un album
-            id = input("Inserte el ID del album: ")
-            if disqueria.contiene_album(id):
-                print("El Album no existe")
+        if opcion == 2: # dar de baja un álbum
+            id_album = input("Inserte el ID del álbum: ")
+            if disqueria.contiene_album(id_album):
+                disqueria.eliminar_album(id_album)
+                print("Álbum dado de baja")
             else:
-                disqueria.eliminar_album(id)
-                print("Album dado de baja")
+                print("El álbum no existe")
+
 
         if opcion == 3: #buscar album
-            id_album = input("Inserte el ID del album: ")
-            if disqueria.contiene_album(id):               #ver bien
-                disqueria.buscar_album(id)                 #ver bien
+            id_album = input("Inserte el ID del album: ") #al ingresar un el id previamente registrado no lo devuelve, dice que no se encuentra.
+            if disqueria.contiene_album(id_album):              
+                disqueria.buscar_album(id_album)                
             else:
                 print("No se encuentra el album")
 
@@ -90,12 +91,12 @@ def run(disqueria):
            disqueria.mostrar_albumes()
 
         if opcion == 6: #dar de alta empleado
-            nombreE= input("Nombre del empleado: ")
+            nombre= input("Nombre del empleado: ")
             dni= input("DNI del empleado: ")
             telefono= input("Telefono del empleado: ")
             direccion = input("Direccion del empleado: ")
             cargo= input("Cargo asignado: ")
-            empleado = Empleados(nombreE, dni, telefono, direccion, cargo)
+            empleado = Empleados(nombre, dni, telefono, direccion, cargo)
             
             if disqueria.contiene_empleado(empleado.dni):
                 print("El empleado ya existe.")
@@ -117,8 +118,8 @@ def run(disqueria):
 
         if opcion == 9: #buscar empleado
             dni_empleado = input("Insertar el dni del empleado: ")
-            if disqueria.contiene_empleado(dni_empleado):               #ver bien
-                disqueria.buscar_empleado(dni_empleado)                 #ver bien
+            if disqueria.contiene_empleado(dni_empleado):               
+                disqueria.buscar_empleado(dni_empleado)                 
             else:
                 print("No se encuentra el empleado")
 
