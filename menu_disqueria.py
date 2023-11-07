@@ -26,9 +26,10 @@ def menu():
 
 def run(disqueria):    
     opcion = 0
-    while opcion != 13:    #Mientras que sea distinto de 13 --->(salir)
+    while opcion != 13:    #Mientras que sea distinto de 13 =--->(salir)
         opcion = menu()
-        if opcion == 1:     #dar de alta un album
+        if opcion == 1:
+            id_album = input("ID del album: ")     #dar de alta un album
             nombre_album = input("Nombre del album: ")
             artista = input("Nombre del Artista: ")                     
             genero_musical = input("Genero musical: ")                         
@@ -36,7 +37,7 @@ def run(disqueria):
             stock = input("Cant de producto: ")
             precio_de_compra = float(input("Precio de compra: "))
             precio_venta_cliente = float(input("Precio de venta: "))
-            album = Album(nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
+            album = Album(id_album, nombre_album,artista,genero_musical,categoria,stock,precio_de_compra,precio_venta_cliente)                             
 #completar
             if disqueria.contiene_album(Album.nombre): 
                 print("El Album ya existe.")
@@ -71,13 +72,12 @@ def run(disqueria):
             telefono= input("Telefono del empleado: ")
             direccion = input("Direccion del empleado: ")
             cargo= input("Cargo asignado: ")
-            dineroAportado = input("")               #podriamos inicializarlo en 0 desde el init ?
-            empleado = Empleados(nombreE, dni, telefono, direccion, cargo, dineroAportado)
+            empleado = Empleados(nombreE, dni, telefono, direccion, cargo)
             
-            if disqueria.contiene_empleado(empleado.nombre):
+            if disqueria.contiene_empleado(empleado.dni):
                 print("El empleado ya existe.")
             else:
-                disqueria.AgregarEmpleado(empleado)
+                disqueria.alta_nuevo_empleado(empleado)
                 print("Empleado dado de alta.")
 
 

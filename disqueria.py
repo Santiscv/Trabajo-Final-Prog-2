@@ -104,15 +104,15 @@ class Disqueria:
         pickle_file.close()
 
 class Album:
-    def __init__(self, id,nombre_album, artista, genero_musical, categoria, stock):
-        self.id=id
+    def __init__(self, id,nombre_album, artista, genero_musical, categoria, stock, precio_compra, precio_venta):
+        self.id = id
         self.nombre = nombre_album
         self.artista = artista
         self.genero_musical = genero_musical
         self.categoria = categoria
         self.stock = stock
-        self.precio_compra_tienda = 0
-        self.precio_venta_cliente = 0
+        self.precio_compra_tienda = precio_compra
+        self.precio_venta_cliente = precio_venta
         self.dinero_en_caja = 0
 
     def __lt__(self, other): # x<y llama x.__lt__(y)
@@ -136,7 +136,7 @@ class Album:
             
             
 class Empleados:
-    def __init__(self, nombre, dni, telefono, direccion, cargo, dinero_aportado):
+    def __init__(self, nombre, dni, telefono, direccion, cargo):
         self.nombre = nombre
         self.dni = dni 
         self.telefono = telefono
