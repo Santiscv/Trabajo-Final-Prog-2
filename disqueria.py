@@ -112,10 +112,11 @@ class Album:
         return self.nombre>=other.nombre
           
         
+    
 
     def __str__(self):
-        return "ID: {0}\n Album: {1}\n: {2}\n Artista: {3}\n Genero Musical: {4}\n Categoria: {5}\n: {6}\Stock: {7}\Precio para la tienda: {8}\n Precio para el cliente: {9}\n: {10}\Dinero en caja:\n" \
-            .format(self.ai,self.nombre,self.artista,self.genero_musical,self.categoria,  self.stock, self.precio_compra_tienda,self.precio_venta_cliente,self.dinero_en_caja)          
+        return "ID: {0}\nAlbum: {1}\nArtista: {2}\nGenero Musical: {3}\nCategoria:  {4}\nStock:  {5}\nPrecio para la tienda: {6}\nPrecio para el cliente: {7}\nDinero en caja: {8}" \
+            .format(self.id, self.nombre, self.artista, self.genero_musical, self.categoria, self.stock, self.precio_compra_tienda, self.precio_venta_cliente, self.dinero_en_caja)          
             
             
 class Empleados:
