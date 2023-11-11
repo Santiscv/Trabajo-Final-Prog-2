@@ -66,6 +66,7 @@ def run(disqueria):
                 id_album = input("Inserte el ID del álbum: ")
                 if disqueria.contiene_album(id_album):
                     disqueria.buscar_album(id_album)
+                    
                 else:
                     print("No se encuentra el álbum")
 
