@@ -11,9 +11,12 @@ class Disqueria:
     
     def buscar_album(self,id)->"Album": #igual
         if id in self.arbol_album:
-            return self.arbol_album[id].__str__()
+            album = self.arbol_album[id]
+            print(album)
+            return album
         else:
             return None
+        
         
     def alta_nuevo_album(self,album):
         self.arbol_album[album.id] = album #igual
