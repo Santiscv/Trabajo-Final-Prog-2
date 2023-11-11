@@ -24,7 +24,6 @@ def run(disqueria):
     print("Hellfish Disquerias")
     print("(1) Sí\n(2) No")
     inicio = input("Elije una opción para entrar al sistema: ")
-    
     while inicio == '1':
         opcion = menu()
         if opcion not in ['1','2','3','4','5','6','7','8','9','10','11','12','13']:
