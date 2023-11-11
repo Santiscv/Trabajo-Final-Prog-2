@@ -137,9 +137,6 @@ def run(disqueria):
                     print("Empleado modificado con éxito.")
                 else:
                     print("El empleado no existe en la disquería.")
-                    
-                 
-
             elif opcion == "9":
                 # Buscar empleado
                 dni_empleado = input("Insertar el DNI del empleado: ")
@@ -162,6 +159,9 @@ def run(disqueria):
 
             opcion = menu()
 
+
 if __name__ == "__main__":
     disqueria = Disqueria()
     run(disqueria)
+
+
