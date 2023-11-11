@@ -16,7 +16,7 @@ class Disqueria:
             return None
         
     def alta_nuevo_album(self,album):
-        self.arbol_album[album.id] = album #igual que aca
+        self.arbol_album[album.nombre] = album #igual que aca
         
     def eliminar_album(self, id): #esta es una opcion
         self.arbol_album.eliminar(id)
