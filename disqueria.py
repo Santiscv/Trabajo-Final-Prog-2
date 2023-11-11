@@ -6,25 +6,26 @@ class Disqueria:
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
     
-    def contiene_album(self,id)->bool:
+    def contiene_album(self,id)->bool: #igual
         return id in self.arbol_album
     
-    def buscar_album(self,id)->"Album":
+    def buscar_album(self,id)->"Album": #igual
         if id in self.arbol_album:
             return self.arbol_album[id]
         else:
             return None
         
     def alta_nuevo_album(self,album):
-        self.arbol_album[album.nombre] = album #igual que aca
+        self.arbol_album[album.id] = album #igual
         
-    def eliminar_album(self, id): #esta es una opcion
+    def eliminar_album(self, id): #igual
         self.arbol_album.eliminar(id)
     
     
     def mostrar_albumes(self):
         self.arbol_album.inorden() #provisorio
             
+            #probar
     def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):    
         if self.arbol_album[id] == self.arbol_album(id): 
          self.arbol_album.nombre = nuevo_nombre
@@ -36,18 +37,19 @@ class Disqueria:
     ############ empleado ##########
     
     
-    def alta_nuevo_empleado(self, empleado)->None:
+    def alta_nuevo_empleado(self, empleado)->None: #igual
         self.arbol_empleado[empleado.dni] = empleado
         
     
-    def eliminar_empleado(self,dni)->None: 
-        empleado = self.buscar_empleado(dni)
-        self.arbol_empleado.eliminar(empleado)   
+    def eliminar_empleado(self,dni)->None:  #corregido
+        self.arbol_empleado.eliminar(dni)
+        #empleado = self.buscar_empleado(dni)
+        #self.arbol_empleado.eliminar(empleado)   
                     
-    def contiene_empleado(self,dni)->bool:
+    def contiene_empleado(self,dni)->bool: #igual
         return dni in self.arbol_empleado
     
-    def buscar_empleado(self, dni)->"Empleados":
+    def buscar_empleado(self, dni)->"Empleados": #igual
         if dni in self.arbol_empleado:
             return self.arbol_empleado[dni]
         else:
@@ -66,16 +68,6 @@ class Disqueria:
             self.arbol_empleado.cargo = nuevo_cargo
             self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
 
-
-    def alquilar_pelicula(self,nombre,dni):
-        for pelicula in self.peliculas:
-            if pelicula.nombre == nombre and pelicula.alquilada == None:
-                pelicula.alquilada = dni
-                
-    def devolver_pelicula(self,nombre):
-        for pelicula in self.peliculas:
-            if pelicula.nombre == nombre and pelicula.alquilada != None:
-                pelicula.alquilada = None
          
     def guardar_archivo(self,archivo="disqueria.pickle"):
         pickle_file = open(archivo, 'wb')
