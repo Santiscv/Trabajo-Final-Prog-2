@@ -11,7 +11,7 @@ class Disqueria:
     
     def buscar_album(self,id)->"Album": #igual
         if id in self.arbol_album:
-            return self.arbol_album[id]
+            return self.arbol_album[id].__str__()
         else:
             return None
         
@@ -45,12 +45,14 @@ class Disqueria:
         empleado = self.buscar_empleado(dni)
         self.arbol_empleado.eliminar(empleado)   
                     
-    def contiene_empleado(self,dni)->bool:
+    def contiene_empleado(self,dni)->bool: #igual
         return dni in self.arbol_empleado
     
     def buscar_empleado(self, dni)->"Empleados": #igual
         if dni in self.arbol_empleado:
-            return self.arbol_empleado[dni]
+            empleado= self.arbol_empleado[dni]
+            print(empleado)
+            return empleado
         else:
             return None
     
@@ -66,6 +68,7 @@ class Disqueria:
             self.arbol_empleado.direccion = nueva_direccion
             self.arbol_empleado.cargo = nuevo_cargo
             self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
+
 
          
     def guardar_archivo(self,archivo="disqueria.pickle"):
@@ -108,8 +111,8 @@ class Album:
         
 
     def __str__(self):
-        return "Album: {0}\n: {1}\Artista: {2}\Genero Musical: {3}\n Categoria: {4}\n: {5}\Stock: {6}\Precio para la tienda: {7}\n Precio para el cliente: {8}\n: {9}\Dinero en caja:\n" \
-            .format(self.nombre,self.artista,self.genero_musical,self.categoria,  self.stock, self.precio_compra_tienda,self.precio_venta_cliente,self.dinero_en_caja)          
+        return "ID: {0}\n Album: {1}\n: {2}\n Artista: {3}\n Genero Musical: {4}\n Categoria: {5}\n: {6}\Stock: {7}\Precio para la tienda: {8}\n Precio para el cliente: {9}\n: {10}\Dinero en caja:\n" \
+            .format(self.ai,self.nombre,self.artista,self.genero_musical,self.categoria,  self.stock, self.precio_compra_tienda,self.precio_venta_cliente,self.dinero_en_caja)          
             
             
 class Empleados:
@@ -135,7 +138,7 @@ class Empleados:
         return self.dni>=other.dni
 
     def __str__(self):
-        return "nombre: {0}\DNI: {1}\Telefono: {2}\Direccion: {3}\Cargo: {4}\Dinero aportado: {5}" \
+        return "nombre: {0}\nDNI: {1}\nTelefono: {2}\nDireccion: {3}\nCargo: {4}\nDinero aportado: {5}" \
             .format(self.nombre, self.dni, self.telefono,self.direccion,self.cargo, self.dinero_aportado)
 
 
