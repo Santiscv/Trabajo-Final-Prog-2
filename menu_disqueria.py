@@ -120,8 +120,25 @@ def run(disqueria):
                     print("El empleado no existe.")
 
             elif opcion == "8":
-                pass
-                # Modificar empleado (pendiente)
+                # Modificar empleado
+                dni_empleado = input("Inserte el dni del empleado a modificar: ")
+                if disqueria.contiene_empleado(dni_empleado):
+                    nuevo_nombre = input("Nuevo nombre del empleado: ")
+                    nuevo_telefono = input("Nuevo telefono del empleado: ")
+                    nueva_direccion = input("Nueva direccion del empleado: ")
+                    nuevo_cargo = input("Nuevo cargo del empleado: ")
+                    nuevo_dinero_aportado = input("Nuevo dinero aportado: ")
+                    empleado = disqueria.buscar_empleado(dni_empleado)
+                    empleado.nombre = nuevo_nombre
+                    empleado.telefono = nuevo_telefono
+                    empleado.direccion = nueva_direccion
+                    empleado.cargo = nuevo_cargo
+                    empleado.dinero_aportado = nuevo_dinero_aportado
+                    print("Empleado modificado con éxito.")
+                else:
+                    print("El empleado no existe en la disquería.")
+                    
+                 
 
             elif opcion == "9":
                 # Buscar empleado
