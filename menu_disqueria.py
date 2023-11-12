@@ -46,10 +46,17 @@ def run(disqueria):
                     artista = input("Nombre del Artista: ")
                     genero_musical = input("Género musical: ")
                     categoria = input("Categoría: ")
-                    stock = input("Cantidad de producto: ")
-                    precio_de_compra = float(input("Precio de compra: "))
-                    precio_venta_cliente = float(input("Precio de venta: "))
+                    
+                    try:
+                        stock = int(input("Cantidad de producto: "))
+                        precio_de_compra = float(input("Precio de compra: "))
+                        precio_venta_cliente = float(input("Precio de venta: "))
+                    except ValueError:
+                        print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                        continue 
+                    
                     album = Album(id_album, nombre_album, artista, genero_musical, categoria, stock, precio_de_compra, precio_venta_cliente)
+                    
                     if disqueria.contiene_album(album.nombre):
                         print("El Álbum ya existe.")
                     else:
@@ -81,10 +88,24 @@ def run(disqueria):
                         nuevo_artista = input("Nuevo nombre del artista: ")
                         nuevo_genero_musical = input("Nuevo género musical: ")
                         nueva_categoria = input("Nueva categoría: ")
-                        nuevo_stock = input("Nueva cantidad de producto: ")
+                        nuevo_stock = int(input("Nueva cantidad de producto: "))
                         nuevo_precio_compra = float(input("Nuevo precio de compra: "))
                         nuevo_precio_venta = float(input("Nuevo precio de venta: "))
+                        try:
+                            nuevo_stock = int(input("Nueva cantidad de producto: "))
+                            nuevo_precio_compra = float(input("Nuevo precio de compra: "))
+                            nuevo_precio_venta = float(input("Nuevo precio de venta: "))
+                            
+                        except ValueError:
+                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                            continue 
+                        
+                        print("--")
+                        print("Valores anteriores")
+                        print("--")
+                        
                         album = disqueria.buscar_album(id_album)
+                
                         album.nombre = nuevo_nombre
                         album.artista = nuevo_artista
                         album.genero_musical = nuevo_genero_musical
@@ -106,11 +127,20 @@ def run(disqueria):
                 elif opcion == "6":
                     # Dar de alta empleado
                     nombre = input("Nombre del empleado: ")
-                    dni = input("DNI del empleado: ")
-                    telefono = input("Teléfono del empleado: ")
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    dni = int(input("DNI del empleado: "))
+                    print("NOTA: El telefono no tiene que tener simbolo + o separacion de puntos")
+                    telefono = int(input("Teléfono del empleado: "))
                     direccion = input("Dirección del empleado: ")
                     cargo = input("Cargo asignado: ")
+                    try:
+                        dni = int(input("DNI del empleado: "))
+                        telefono = int(input("Teléfono del empleado: "))
+                    except ValueError:
+                        print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                        continue 
                     empleado = Empleados(nombre, dni, telefono, direccion, cargo)
+                    
                     if disqueria.contiene_empleado(empleado.dni):
                         print("El empleado ya existe.")
                     else:
@@ -132,7 +162,13 @@ def run(disqueria):
 
                 elif opcion == "9":
                     # Buscar empleado
-                    dni_empleado = input("Insertar el DNI del empleado: ")
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    dni_empleado = int(input("Insertar el DNI del empleado: "))
+                    try:
+                       dni_empleado = int(input("Insertar el DNI del empleado: "))
+                    except ValueError:
+                        print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                        continue 
                     if disqueria.contiene_empleado(dni_empleado):
                         disqueria.buscar_empleado(dni_empleado)
                     else:
