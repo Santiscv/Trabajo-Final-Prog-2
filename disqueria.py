@@ -2,9 +2,10 @@ import pickle #libreria para guardar y recuperar informacion
 from Arbol_binario import ArbolBinarioBusqueda #abb = Arbol binario de busqueda.
 
 class Disqueria:
-    def __init__(self):
+    def __init__(self, dinero_invertido):
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
+        self.presupuesto_disqueria = dinero_invertido
     
     def __len__(self):
         return len(self.arbol_album)
@@ -20,8 +21,17 @@ class Disqueria:
         else:
             return None
         
+    def buscar_album2(self,id)->"Album": #igual
+        if id in self.arbol_album:
+            album = self.arbol_album[id]
+        
+            return album
+        else:
+            return None
+        
         
     def alta_nuevo_album(self,album):
+        self.presupuesto_disqueria -= album.precio_compra_tienda * album.stock #nico
         self.arbol_album[album.id] = album #igual
         
     def eliminar_album(self, id): #igual
@@ -32,13 +42,17 @@ class Disqueria:
         self.arbol_album.inorden() #provisorio
             
             #probar
-    def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):    
-        if self.arbol_album[id] == self.arbol_album(id): 
-         self.arbol_album.nombre = nuevo_nombre
-         self.arbol_album.artista = nuevo_artista
-         self.arbol_album.genero = nuevo_genero
-         self.arbol_album.categoria = nueva_categoria
-         self.arbol_album.stock = nuevo_stock
+    def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):
+        album_a_modificar = self.buscar_album2(self,id)
+        if album_a_modificar is not None:
+        #if self.arbol_album[id] == self.arbol_album(id): 
+            self.arbol_album.nombre = nuevo_nombre
+            self.arbol_album.artista = nuevo_artista
+            self.arbol_album.genero = nuevo_genero
+            self.arbol_album.categoria = nueva_categoria
+            self.arbol_album.stock = nuevo_stock
+        else:
+            print("No se encontró el album.")
         
     ############ empleado ##########
     
@@ -100,7 +114,7 @@ class Album:
         self.stock = stock
         self.precio_compra_tienda = precio_compra
         self.precio_venta_cliente = precio_venta
-        self.dinero_en_caja = 0
+        self.dinero_en_caja = precio_venta - precio_compra
 
     def __lt__(self, other): # x<y llama x.__lt__(y)
         return self.nombre<other.nombre
