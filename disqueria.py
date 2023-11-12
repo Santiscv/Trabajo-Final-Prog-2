@@ -44,9 +44,10 @@ class Disqueria:
         self.arbol_empleado[empleado.dni] = empleado
         
     
-    def eliminar_empleado(self,dni)->None: 
-        empleado = self.buscar_empleado(dni)
-        self.arbol_empleado.eliminar(empleado)   
+    def eliminar_empleado(self,dni)->None:
+        self.arbol_empleado.eliminar(dni) 
+        #empleado = self.buscar_empleado(dni)
+        #self.arbol_empleado.eliminar(empleado)   
                     
     def contiene_empleado(self,dni)->bool: #igual
         return dni in self.arbol_empleado
