@@ -153,6 +153,7 @@ def run(disqueria):
                     print("--")
                     break
 
+
 if __name__ == "__main__":
     disqueria = Disqueria()
     run(disqueria)
