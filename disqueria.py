@@ -6,6 +6,9 @@ class Disqueria:
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
     
+    def __len__(self):
+        return len(self.arbol_album)
+    
     def contiene_album(self,id)->bool: #igual
         return id in self.arbol_album
     
@@ -142,6 +145,9 @@ class Empleados:
     def __ge__(self, other): # x>=y llama x.__ge__(y)
         return self.dni>=other.dni
 
+    def __len__(self):
+        return len(self.arbol_empleado)
+    
     def __str__(self):
         return "nombre: {0}\nDNI: {1}\nTelefono: {2}\nDireccion: {3}\nCargo: {4}\nDinero aportado: {5}" \
             .format(self.nombre, self.dni, self.telefono,self.direccion,self.cargo, self.dinero_aportado)
