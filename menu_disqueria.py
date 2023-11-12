@@ -98,7 +98,10 @@ def run(disqueria):
 
                 elif opcion == "5":
                     # Listar álbumes
-                    disqueria.mostrar_albumes()
+                    if len(disqueria.arbol_album) == 0:
+                        print("No hay álbumes disponibles.")
+                    else:
+                        disqueria.mostrar_albumes()
 
                 elif opcion == "6":
                     # Dar de alta empleado
@@ -136,8 +139,10 @@ def run(disqueria):
                         print("No se encuentra el empleado")
 
                 elif opcion == "10":
-                    # Listar empleados
-                    disqueria.mostrar_empleados()
+                    if len(disqueria.arbol_empleado) == 0:
+                        print("No hay empleados cargados en el sistema")
+                    else:    
+                        disqueria.mostrar_empleados()
 
                 elif opcion == "11":
                     # Guardar archivo
