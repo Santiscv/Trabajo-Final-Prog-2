@@ -46,6 +46,9 @@ def run(disqueria):
                     artista = input("Nombre del Artista: ")
                     genero_musical = input("Género musical: ")
                     categoria = input("Categoría: ")
+                    stock = int(input("Cantidad de producto: "))
+                    precio_de_compra = float(input("Precio de compra: "))
+                    precio_venta_cliente = float(input("Precio de venta: "))
                     
                     try:
                         stock = int(input("Cantidad de producto: "))
