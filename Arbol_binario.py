@@ -129,7 +129,7 @@ class ArbolBinarioBusqueda:
             print(arbol.clave)
             self._inorden(arbol.hijoDerecho)
 
-#-------Para imprimir la lista de albumes se copio el inorden pero para que
+#-------Para imprimir la lista de albumes se copio el inorden pero para que imprima la carga util
     def EnOrden(self, arbol):
         self._EnOrden(arbol)
 
@@ -139,7 +139,17 @@ class ArbolBinarioBusqueda:
             album = self.obtener(arbol.clave)
             print(f"ID: {album.id}, Nombre del álbum: {album.nombre}")
             self._EnOrden(arbol.hijoDerecho)
+#-----------Para imprimir la lista de empleados se copio el EnOrden de album
 
+    def EnOrden_empleado(self, arbol):
+        self._EnOrden_empleado(arbol)
+
+    def _EnOrden_empleado(self, arbol):
+        if arbol != None:
+            self._EnOrden_empleado(arbol.hijoIzquierdo)
+            empleado = self.obtener(arbol.clave)
+            print(f"DNI: {empleado.dni}, Nombre del empleado: {empleado.nombre}")
+            self._EnOrden_empleado(arbol.hijoDerecho)
 
 
     def postorden(self):

@@ -58,6 +58,8 @@ class Disqueria:
         
     ############ empleado ##########
     
+    def __len_empleado__(self):
+        return len(self.arbol_empleado)
     
     def alta_nuevo_empleado(self, empleado)->None: #igual
         self.arbol_empleado[empleado.dni] = empleado
@@ -89,16 +91,17 @@ class Disqueria:
             return None    
     
     def mostrar_empleados(self):
-        self.arbol_empleado.inorden() #provisorio
+        self.arbol_empleado.EnOrden_empleado(self.arbol_empleado.raiz)
+        #self.arbol_empleado.inorden() #provisorio
     
         
     def modificar_empleado(self, dni, nuevo_nombre,nuevo_telefono, nueva_direccion, nuevo_cargo, nuevo_dinero_aportado):
-        if self.arbol_empleado[dni] == self.arbol_empleado.buscar_empleado(dni):
+        if self.arbol_empleado[dni] == self.arbol_empleado.buscar_empleado2(dni):
             self.arbol_empleado.nombre = nuevo_nombre
             self.arbol_empleado.telefono = nuevo_telefono
             self.arbol_empleado.direccion = nueva_direccion
             self.arbol_empleado.cargo = nuevo_cargo
-            self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
+            #self.arbol_empleado.dinero_aportado = nuevo_dinero_aportado
 
 
          
@@ -168,8 +171,8 @@ class Empleados:
     def __ge__(self, other): # x>=y llama x.__ge__(y)
         return self.dni>=other.dni
 
-    def __len__(self):
-        return len(self.arbol_empleado)
+    #def __len__(self):
+    #    return len(self.arbol_empleado)
     
     def __str__(self):
         return "nombre: {0}\nDNI: {1}\nTelefono: {2}\nDireccion: {3}\nCargo: {4}\nDinero aportado: {5}" \

@@ -152,16 +152,43 @@ def run(disqueria):
 
                 elif opcion == "7":
                     # Dar de baja empleado
-                    dni_empleado = input("Inserte el DNI del empleado: ")
+                    dni_empleado = int(input("Inserte el DNI del empleado: "))
                     if disqueria.contiene_empleado(dni_empleado):
                         disqueria.eliminar_empleado(dni_empleado)
                         print("Empleado dado de baja.")
                     else:
                         print("El empleado no existe.")
 
+                    #Modificar empleado
                 elif opcion == "8":
-                    pass
-                    # Modificar empleado (pendiente)
+                    dni_e = int(input("Inserte el DNI del empleado a modificar: "))
+                    if disqueria.contiene_empleado(dni_e):
+                        nuevo_nombre = input("Nuevo nombre del empleado: ")
+                        nuevo_telefono = int(input("Nuevo telefono del empleado: "))
+                        nueva_direccion = (input("Nueva direccion del empleado: "))
+                        nuevo_cargo = input("Nuevo cargo del empleado: ")
+                        try:
+                            nuevo_telefono = int(input("Nuevo telefono del empleado: "))
+                            
+                        except ValueError:
+                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                            continue 
+                        
+                        print("--")
+                        print(f"Se modificaron los valores anteriores del empleado con dni {dni_e}.")
+                        print("--")
+
+                        empleado = disqueria.buscar_empleado2(dni_e) # buscar_empleado2() no imprime los valores. el que si lo hace es buscar_empleado()
+                
+                        empleado.nombre = nuevo_nombre
+                        empleado.telefono = nuevo_telefono
+                        empleado.direccion = nueva_direccion
+                        empleado.cargo = nuevo_cargo
+                        
+                        print("Empleado modificado con éxito.")
+                    else:
+                        print("El empleado no está cargado en la disquería.")
+                        
 
                 elif opcion == "9":
                     # Buscar empleado
