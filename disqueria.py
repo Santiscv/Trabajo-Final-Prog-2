@@ -19,7 +19,7 @@ class Disqueria:
             empleado.dinero_aportado += precio_venta_total
 
             # Actualizar album
-            album.dinero_en_caja += precio_venta_total
+            album.dinero_beneficio += precio_venta_total
             album.stock -= cantidad
             
     def __len__(self):
@@ -160,7 +160,7 @@ class Album:
 
     def __str__(self):
         return "ID: {0}\nAlbum: {1}\nArtista: {2}\nGenero Musical: {3}\nCategoria:  {4}\nStock:  {5}\nPrecio para la tienda: {6}\nPrecio para el cliente: {7}\nDinero en caja: {8}" \
-            .format(self.id, self.nombre, self.artista, self.genero_musical, self.categoria, self.stock, self.precio_compra_tienda, self.precio_venta_cliente, self.dinero_en_caja)          
+            .format(self.id, self.nombre, self.artista, self.genero_musical, self.categoria, self.stock, self.precio_compra_tienda, self.precio_venta_cliente, self.dinero_beneficio)          
             
             
 class Empleados:
