@@ -187,6 +187,7 @@ def run(disqueria):
                     else:
                         print("--")
                         print("El empleado no existe.")
+                        print("--")
 
                 elif opcion == "8":
                     pass
