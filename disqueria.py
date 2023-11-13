@@ -5,25 +5,8 @@ class Disqueria:
     def __init__(self):
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
-        self.presupuesto_disqueria = 0
-
-    def venta_album(self, id_album, cantidad, dni_empleado):
-        album = self.buscar_album2(id_album)
-        empleado = self.buscar_empleado2(dni_empleado)
-
-        if album and empleado and cantidad > 0 and album.stock >= cantidad:
-            # Realizar la venta
-            precio_venta_total = album.precio_venta_cliente * cantidad
-
-            # Actualizar empleado
-            empleado.dinero_aportado += precio_venta_total
-
-            # Actualizar album
-            album.dinero_en_caja += precio_venta_total
-            album.stock -= cantidad
-            
- 
-
+        self.presupuesto_disqueria = dinero_invertido
+    
     def __len__(self):
         return len(self.arbol_album)
     
@@ -38,8 +21,7 @@ class Disqueria:
         else:
             return None
         
-    def buscar_album2(self,id)->"Album": #IGUAL QUE BUSCAR ALBUM PERO SIN PRINT
-        id= str(id)
+    def buscar_album2(self,id)->"Album": #igual
         if id in self.arbol_album:
             album = self.arbol_album[id]
             return album

@@ -187,48 +187,10 @@ def run(disqueria):
                     else:
                         print("--")
                         print("El empleado no existe.")
-                        print("--")
-                        
 
-                    #Modificar empleado
                 elif opcion == "8":
-                    dni_e = int(input("Inserte el DNI del empleado a modificar: "))
-                    if disqueria.contiene_empleado(dni_e):
-                        nuevo_nombre = input("Nuevo nombre del empleado: ")
-                        nuevo_telefono = int(input("Nuevo telefono del empleado: "))
-                        nueva_direccion = (input("Nueva direccion del empleado: "))
-                        nuevo_cargo = input("Nuevo cargo del empleado: ")
-                        try:
-                            nuevo_telefono = int(input("Nuevo telefono del empleado: "))
-                            
-                        except ValueError:
-                            print("--")
-                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
-                            print("--")
-
-                            continue 
-                        
-                        print("--")
-                        print(f"Se modificaron los valores anteriores del empleado con dni {dni_e}.")
-                        print("--")
-
-                        empleado = disqueria.buscar_empleado2(dni_e) # buscar_empleado2() no imprime los valores. el que si lo hace es buscar_empleado()
-                
-                        empleado.nombre = nuevo_nombre
-                        empleado.telefono = nuevo_telefono
-                        empleado.direccion = nueva_direccion
-                        empleado.cargo = nuevo_cargo
-                        
-                        print("--")
-                        print("Empleado modificado con éxito.")
-                        print("--")
-                        
-                    else:
-                        print("--")
-                        print("El empleado no está cargado en la disquería.")
-                        print("--")
-                        
-                        
+                    pass
+                    # Modificar empleado (pendiente)
 
                 elif opcion == "9":
                     # Buscar empleado
