@@ -133,6 +133,7 @@ class ArbolBinarioBusqueda:
             self._inorden(arbol.hijoDerecho)
 
 #-------Para imprimir la lista de albumes se copio el inorden pero para que imprima la carga util
+    
     def EnOrden(self, arbol):
         self._EnOrden(arbol)
 
