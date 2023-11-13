@@ -36,15 +36,18 @@ class ArbolBinarioBusqueda:
         else:
             return None
 
-    def _obtener(self,clave,nodoActual):
+
+    def _obtener(self, clave, nodoActual):
         if not nodoActual:
             return None
-        elif nodoActual.clave == clave:
+        elif clave == nodoActual.clave:
             return nodoActual
+        elif type(clave) != type(nodoActual.clave):
+            return self._obtener(int(clave), nodoActual)
         elif clave < nodoActual.clave:
-            return self._obtener(clave,nodoActual.hijoIzquierdo)
+            return self._obtener(clave, nodoActual.hijoIzquierdo)
         else:
-            return self._obtener(clave,nodoActual.hijoDerecho)
+            return self._obtener(clave, nodoActual.hijoDerecho)
 
     def __getitem__(self,clave):
         res = self.obtener(clave)
@@ -117,6 +120,9 @@ class ArbolBinarioBusqueda:
                 else:
                     nodoActual.reemplazarDatoDeNodo(nodoActual.hijoDerecho.clave, nodoActual.hijoDerecho.cargaUtil, nodoActual.hijoDerecho.hijoIzquierdo, nodoActual.hijoDerecho.hijoDerecho)
 
+
+
+
     def inorden(self):
         self._inorden(self.raiz)
 
@@ -125,6 +131,29 @@ class ArbolBinarioBusqueda:
             self._inorden(arbol.hijoIzquierdo)
             print(arbol.clave)
             self._inorden(arbol.hijoDerecho)
+
+#-------Para imprimir la lista de albumes se copio el inorden pero para que imprima la carga util
+    def EnOrden(self, arbol):
+        self._EnOrden(arbol)
+
+    def _EnOrden(self, arbol):
+        if arbol != None:
+            self._EnOrden(arbol.hijoIzquierdo)
+            album = self.obtener(arbol.clave)
+            print(f"ID: {album.id}, Nombre del álbum: {album.nombre}")
+            self._EnOrden(arbol.hijoDerecho)
+#-----------Para imprimir la lista de empleados se copio el EnOrden de album
+
+    def EnOrden_empleado(self, arbol):
+        self._EnOrden_empleado(arbol)
+
+    def _EnOrden_empleado(self, arbol):
+        if arbol != None:
+            self._EnOrden_empleado(arbol.hijoIzquierdo)
+            empleado = self.obtener(arbol.clave)
+            print(f"DNI: {empleado.dni}, Nombre del empleado: {empleado.nombre}")
+            self._EnOrden_empleado(arbol.hijoDerecho)
+
 
     def postorden(self):
         self._postorden(self.raiz)
