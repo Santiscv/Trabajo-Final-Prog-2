@@ -117,6 +117,9 @@ class ArbolBinarioBusqueda:
                 else:
                     nodoActual.reemplazarDatoDeNodo(nodoActual.hijoDerecho.clave, nodoActual.hijoDerecho.cargaUtil, nodoActual.hijoDerecho.hijoIzquierdo, nodoActual.hijoDerecho.hijoDerecho)
 
+
+
+
     def inorden(self):
         self._inorden(self.raiz)
 
@@ -125,6 +128,19 @@ class ArbolBinarioBusqueda:
             self._inorden(arbol.hijoIzquierdo)
             print(arbol.clave)
             self._inorden(arbol.hijoDerecho)
+
+#-------Para imprimir la lista de albumes se copio el inorden pero para que
+    def EnOrden(self, arbol):
+        self._EnOrden(arbol)
+
+    def _EnOrden(self, arbol):
+        if arbol != None:
+            self._EnOrden(arbol.hijoIzquierdo)
+            album = self.obtener(arbol.clave)
+            print(f"ID: {album.id}, Nombre del álbum: {album.nombre}")
+            self._EnOrden(arbol.hijoDerecho)
+
+
 
     def postorden(self):
         self._postorden(self.raiz)

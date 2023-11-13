@@ -2,10 +2,11 @@ import pickle #libreria para guardar y recuperar informacion
 from Arbol_binario import ArbolBinarioBusqueda #abb = Arbol binario de busqueda.
 
 class Disqueria:
-    def __init__(self, dinero_invertido):
+    def __init__(self):
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
-        self.presupuesto_disqueria = dinero_invertido
+        self.presupuesto_disqueria = 0
+
     
     def __len__(self):
         return len(self.arbol_album)
@@ -21,7 +22,7 @@ class Disqueria:
         else:
             return None
         
-    def buscar_album2(self,id)->"Album": #igual
+    def buscar_album2(self,id)->"Album": #IGUAL QUE BUSCAR ALBUM PERO SIN PRINT
         if id in self.arbol_album:
             album = self.arbol_album[id]
         
@@ -39,7 +40,8 @@ class Disqueria:
     
     
     def mostrar_albumes(self):
-        self.arbol_album.inorden() #provisorio
+        self.arbol_album.EnOrden(self.arbol_album.raiz)
+    
             
             #probar
     def modificar_album(self, id,nuevo_nombre, nuevo_artista, nuevo_genero, nueva_categoria, nuevo_stock):
@@ -61,22 +63,30 @@ class Disqueria:
         self.arbol_empleado[empleado.dni] = empleado
         
     
-    def eliminar_empleado(self,dni)->None:
+    def eliminar_empleado(self, dni)->None:
         self.arbol_empleado.eliminar(dni) 
-        #empleado = self.buscar_empleado(dni)
-        #self.arbol_empleado.eliminar(empleado)   
+
+          
                     
     def contiene_empleado(self,dni)->bool: #igual
         return dni in self.arbol_empleado
     
+    
     def buscar_empleado(self, dni)->"Empleados": #igual
         if dni in self.arbol_empleado:
-            empleado= self.arbol_empleado[dni]
+            empleado = self.arbol_empleado[dni]
             print(empleado)
             return empleado
         else:
             return None
-    
+
+    def buscar_empleado2(self, dni)->"Empleados": #IGUAL QUE BUSCAR EMPLEADO PERO SIN PRINT
+        if dni in self.arbol_empleado:
+            empleado= self.arbol_empleado.obtener(dni)
+            #empleado= self.arbol_empleado[dni]
+            return empleado
+        else:
+            return None    
     
     def mostrar_empleados(self):
         self.arbol_empleado.inorden() #provisorio
@@ -100,8 +110,8 @@ class Disqueria:
     def leer_archivo(self,archivo="disqueria.pickle"):
         pickle_file = open(archivo,'rb')
         disqueria = pickle.load(pickle_file)
-        self.albumes = disqueria.albumes
-        self.empleados = disqueria.empleados
+        self.arbol_album = disqueria.arbol_album
+        self.arbol_empleado = disqueria.arbol_empleado
         pickle_file.close()
 
 class Album:
@@ -129,8 +139,7 @@ class Album:
     def __ge__(self, other): # x>=y llama x.__ge__(y)
         return self.nombre>=other.nombre
           
-        
-    
+           
 
     def __str__(self):
         return "ID: {0}\nAlbum: {1}\nArtista: {2}\nGenero Musical: {3}\nCategoria:  {4}\nStock:  {5}\nPrecio para la tienda: {6}\nPrecio para el cliente: {7}\nDinero en caja: {8}" \
