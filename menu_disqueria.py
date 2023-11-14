@@ -14,10 +14,12 @@ def menu():
     print("(9)  Buscar Empleado")
     print("(10) Listar Empleados")
     print("---------Avanzados--------")
-    print("(11) Guardar archivo")
-    print("(12) Leer archivo")
-    print("(13) Venta de album")
-    print("(14) Salir")
+    print("(11) Venta de album")
+    print("(12) Presupuesto disqueria")
+    print("---------Extras--------")
+    print("(13) Guardar archivo")
+    print("(14) Leer archivo")
+    print("(15) Salir")
     print("---------------------------")
     opcion = input("Elija una opcion: ")
     print("---------------------------")
@@ -35,7 +37,7 @@ def run(disqueria):
         elif inicio == '1':
             while True:
                 opcion = menu()
-                if opcion not in ['1','2','3','4','5','6','7','8','9','10','11','12','13', '14']:
+                if opcion not in ['1','2','3','4','5','6','7','8','9','10','11','12','13', '14','15']:
                     print("--")
                     print("Intente nuevamente.")
                     print("Ingrese una opcion valida.")
@@ -247,20 +249,6 @@ def run(disqueria):
                         disqueria.mostrar_empleados()
 
                 elif opcion == "11":
-                    # Guardar archivo
-                    print("--")
-                    print("Los datos han sidos guardados con exito!.")
-                    print("--")
-                    disqueria.guardar_archivo()
-
-                elif opcion == "12":
-                    # Leer archivo
-                    print("--")
-                    print("Datos leidos con exito!")
-                    print("--")
-                    disqueria.leer_archivo()
-
-                elif opcion == "13":
                     # Venta de Album
                     try:
                         print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
@@ -300,9 +288,26 @@ def run(disqueria):
                                 print("--")
                                 print(f"\nVenta exitosa. Total recaudado: {album.precio_venta_cliente * cantidad}")
                                 print("--")
+                
+                elif opcion == "12":
+                    disqueria.imprimir_presupuesto()
+                    
+                elif opcion == "13":
+                    # Guardar archivo
+                    print("--")
+                    print("Los datos han sidos guardados con exito!.")
+                    print("--")
+                    disqueria.guardar_archivo()
+
+                elif opcion == "14":
+                    # Leer archivo
+                    print("--")
+                    print("Datos leidos con exito!")
+                    print("--")
+                    disqueria.leer_archivo()
 
                 
-                elif opcion == "14":
+                elif opcion == "15":
                     print("--")
                     print("Saliendo del programa.")
                     print("--")
