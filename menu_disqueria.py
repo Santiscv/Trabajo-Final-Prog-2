@@ -87,7 +87,7 @@ def run(disqueria):
 
                 elif opcion == "3":
                     # Buscar álbum
-                    id_album = input("Inserte el ID del álbum: ")
+                    id_album = int(input("Inserte el ID del álbum: "))
                     if disqueria.contiene_album(id_album):
                         disqueria.buscar_album(id_album)
                     else:
@@ -97,7 +97,7 @@ def run(disqueria):
                         
                 elif opcion == "4":
                     # Modificar álbum
-                    id_album = input("Inserte el ID del álbum a modificar: ")
+                    id_album = int(input("Inserte el ID del álbum a modificar: "))
                     if disqueria.contiene_album(id_album):
                         nuevo_nombre = input("Nuevo nombre del álbum: ")
                         nuevo_artista = input("Nuevo nombre del artista: ")
