@@ -34,8 +34,7 @@ def run(disqueria):
             print("Programa finalizado")
             print("--")
             break
-        elif inicio == '1':
-            while True:
+        while inicio == '1':
                 opcion = menu()
                 if opcion not in ['1','2','3','4','5','6','7','8','9','10','11','12','13', '14','15']:
                     print("--")
@@ -46,35 +45,91 @@ def run(disqueria):
 
                 if opcion == "1":
                     # Dar de alta un álbum
-                    id_album = int(input("ID del álbum: "))
                     nombre_album = input("Nombre del álbum: ")
                     artista = input("Nombre del Artista: ")
                     genero_musical = input("Género musical: ")
-                    categoria = input("Categoría: ")
+                    print("--")
+                    print("Categorias") 
+                    print("(1) CD\n(2) Vinilo\n")
+                    categoria = None
+                    while categoria is None:
+                        try:
+                            categoria = int(input("Elija una opción en las categorias: "))
+                        except ValueError:
+                            print("--")
+                            print("(1) CD\n(2) Vinilo\n")
+                            print("--")
+                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                            print("--")
+                            categoria=None
 
+                    id_album = None
+                    while id_album is None:
+                        print("--")
+                        print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
+                        print("--")
+                        try:
+                            id_album = int(input("ID del álbum: "))
+                        except ValueError:
+                            print("--")
+                            print("Error: El ID del album no contiene ninguna letra o caracter especial")
+                            print("--")
+                            id_album = None 
+                    stock = None
+                    while stock is None:
+                        try:
+                            stock = int(input("Cantidad de unidades: "))
+                        except ValueError:
+                            print("--")
+                            print("Ingrese el valor correctamente, intentelo de nuevo")
+                            print("--")
+                            stock = None 
                     try:
-                        stock = int(input("Cantidad de producto: "))
-                        precio_de_compra = float(input("Precio de compra: "))
+                        precio_de_compra = float(input("Precio de compra c/u: "))
                         precio_venta_cliente = float(input("Precio de venta: "))
                     except ValueError:
+                        print("--")
                         print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                        print("--")
                         continue 
+                    while precio_venta_cliente <= precio_de_compra or precio_venta_cliente<=0 and precio_de_compra<0:
+                        print("--")
+                        print("NOTA: No puede introducir valores negativos")
+                        print("NOTA: El valor de la venta debe ser mayor que el valor de la compra")
+                        print("--")
+                        precio_de_compra = float(input("Precio de compra c/u: "))
+                        precio_venta_cliente = float(input("Precio de venta: "))
                     
-                    album = Album(id_album, nombre_album, artista, genero_musical, categoria, stock, precio_de_compra, precio_venta_cliente)
-                    
-                    if disqueria.contiene_album(album.nombre):
-                        print("--")
-                        print("El Álbum ya existe.")
-                        print("--")
-                    else:
-                        disqueria.alta_nuevo_album(album)
-                        print("--")
-                        print("Álbum Agregado")
-                        print("--")
+                    if precio_de_compra < precio_venta_cliente:
+                        album = Album(id_album, nombre_album, artista, genero_musical, categoria, stock, precio_de_compra, precio_venta_cliente)
 
+                        if disqueria.contiene_album(album.id):
+                            print("--")
+                            print("El Álbum ya existe.")
+                            print("--")
+                        else:
+                            if disqueria.presupuesto_disqueria - album.precio_compra_tienda >= 0:
+                                disqueria.presupuesto_disqueria -= album.precio_compra_tienda * album.stock
+                                disqueria.alta_nuevo_album(album)
+                                print("--")
+                                print("Álbum Agregado")
+                                print(f"Presupuesto en caja actualizado: {disqueria.presupuesto_disqueria}")
+                                print("--")
+                            else:
+                                print("--")
+                                print("Error: Presupuesto insuficiente para agregar el álbum.")
+                                print("--")
+                
                 elif opcion == "2":
                     # Dar de baja un álbum
-                    id_album = input("Inserte el ID del álbum: ")
+                    print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
+                    try:
+                        id_album = int(input("Inserte el ID del álbum: "))
+                    except ValueError:
+                        print("--")
+                        print("Error: Ingrese el ID correctamente, Corroborelo")
+                        print("--")
+                        continue 
                     if disqueria.contiene_album(id_album):
                         disqueria.eliminar_album(id_album)
                         print("--")
@@ -87,7 +142,15 @@ def run(disqueria):
 
                 elif opcion == "3":
                     # Buscar álbum
-                    id_album = int(input("Inserte el ID del álbum: "))
+                    print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
+                    try:
+                        id_album = int(input("Inserte el ID del álbum: "))
+                    except ValueError:
+                        print("--")
+                        print("Error: Ingrese el ID correctamente, Corroborelo")
+                        print("--")
+                        continue 
+                    
                     if disqueria.contiene_album(id_album):
                         disqueria.buscar_album(id_album)
                     else:
@@ -97,36 +160,89 @@ def run(disqueria):
                         
                 elif opcion == "4":
                     # Modificar álbum
-                    id_album = int(input("Inserte el ID del álbum a modificar: "))
+                    print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
+                    try:
+                        id_album = int(input("Inserte el ID del álbum a modificar: "))
+                    except ValueError:
+                        print("--")
+                        print("Error: Ingrese el ID correctamente, intentelo de nuevo")
+                        print("--")
+                        continue 
+                    
+                    print("--")
+                    print("Valores anteriores")
+                    print("--")
+                        
+                    album = disqueria.buscar_album(id_album)
+                    
                     if disqueria.contiene_album(id_album):
-                        nuevo_nombre = input("Nuevo nombre del álbum: ")
-                        nuevo_artista = input("Nuevo nombre del artista: ")
-                        nuevo_genero_musical = input("Nuevo género musical: ")
-                        nueva_categoria = input("Nueva categoría: ")
-                        try:
-                            nuevo_stock = int(input("Nueva cantidad de producto: "))
-                            nuevo_precio_compra = float(input("Nuevo precio de compra: "))
-                            nuevo_precio_venta = float(input("Nuevo precio de venta: "))
+                        modificar_nombre_album = input("¿Desea modificar el nombre del álbum? (S/N): ")
+                        if modificar_nombre_album.lower() == 's':
+                            nuevo_nombre = input("Nuevo nombre del álbum: ")
+                            album.nombre = nuevo_nombre
+
+                        modificar_artista = input("¿Desea modificar el nombre del artista? (S/N): ")
+                        if modificar_artista.lower() == 's':
+                            nuevo_artista = input("Nuevo nombre del artista: ")
+                            album.artista = nuevo_artista
+                        
+                        modificar_genero = input("¿Desea modificar el genero? (S/N): ")
+                        if modificar_genero.lower() == 's':
+                            nuevo_genero_musical = input("Nuevo género musical: ")
+                            album.genero_musical = nuevo_genero_musical
                             
-                        except ValueError:
+                        modificar_categoria = input("¿Desea modificar la categoria? (S/N): ")
+                        if modificar_categoria.lower() == 's':
                             print("--")
-                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
-                            print("--")
-                            continue 
+                            print("Categorias") 
+                            print("(1) CD\n(2) Vinilo\n")
+                            nueva_categoria = None
+                            while nueva_categoria is None:
+                                try:
+                                    nueva_categoria = int(input("Nueva categoría: "))
+                                    album.categoria = nueva_categoria
+                                except ValueError:
+                                    print("--")
+                                    print("(1) CD\n(2) Vinilo\n")
+                                    print("--")
+                                    print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                                    print("--")
+                                    nueva_categoria=None
                         
-                        print("--")
-                        print("Valores anteriores")
-                        print("--")
-                        
-                        album = disqueria.buscar_album(id_album)
-                
-                        album.nombre = nuevo_nombre
-                        album.artista = nuevo_artista
-                        album.genero_musical = nuevo_genero_musical
-                        album.categoria = nueva_categoria
-                        album.stock = nuevo_stock
-                        album.precio_compra_tienda = nuevo_precio_compra
-                        album.precio_venta_cliente = nuevo_precio_venta
+                        modificar_stock = input("¿Desea modificar el stock? (S/N): ")
+                        if modificar_stock.lower() == 's':
+                            nuevo_stock = None
+                            while nuevo_stock is None:
+                                try:
+                                    nuevo_stock = int(input("Nueva cantidad de unidades: "))
+                                    album.stock = nuevo_stock
+                                except ValueError:
+                                    print("--")
+                                    print("Ingrese el valor correctamente, intentelo de nuevo")
+                                    print("--")
+                                    nuevo_stock = None 
+                                    
+                        modificar_precios = input("¿Desea modificar los precios? (S/N): ")
+                        if modificar_precios.lower() == 's':            
+                            try:
+                                nuevo_precio_compra = float(input("Nuevo precio de compra c/u: "))
+                                precio_venta_cliente = float(input("Precio de venta: "))
+                                album.precio_compra_tienda = nuevo_precio_compra
+                                album.precio_venta_cliente = nuevo_precio_venta
+                            except ValueError:
+                                print("--")
+                                print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                                print("--")        
+                                
+                            while nuevo_precio_venta <= nuevo_precio_compra or nuevo_precio_venta<=0 and nuevo_precio_compra<0:
+                                print("--")
+                                print("NOTA: No puede introducir valores negativos")
+                                print("NOTA: El valor de la venta debe ser mayor que el valor de la compra")
+                                print("--")
+                                nuevo_precio_compra = float(input("Precio de compra c/u: "))
+                                nuevo_precio_venta = float(input("Precio de venta: "))
+                                album.precio_compra_tienda = nuevo_precio_compra
+                                album.precio_venta_cliente = nuevo_precio_venta
                         
                         print("--")
                         print("Álbum modificado con éxito.")
@@ -150,16 +266,30 @@ def run(disqueria):
                 elif opcion == "6":
                     # Dar de alta empleado
                     nombre = input("Nombre del empleado: ")
-                    try:
-                        print("NOTA: El DNI no tiene que estar separado de puntos ")
-                        dni = int(input("DNI del empleado: "))
-                        print("NOTA: El telefono no tiene que tener simbolo + o separacion de puntos")
-                        telefono = int(input("Teléfono del empleado: "))
-                    except ValueError:
-                        print("--")
-                        print("Error: Ingrese el valor correctamente, intentelo de nuevo")
-                        print("--")
-                        continue 
+                    print("--")
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    print("--")
+                    dni = None
+                    while dni is None:
+                        try:
+                            dni = int(input("DNI del empleado: ")) 
+                        except ValueError:
+                            print("--")
+                            print("Error: Ingrese el DNI correctamente, intentelo de nuevo")
+                            print("--")
+                            dni=None
+                    print("--")
+                    print("NOTA: El telefono no tiene que tener simbolo + o separacion de puntos")
+                    print("--")
+                    telefono = None
+                    while telefono is None:
+                        try:
+                            telefono = int(input("Teléfono del empleado: ")) 
+                        except ValueError:
+                            print("--")
+                            print("Error: Ingrese el telefono correctamente, intentelo de nuevo")
+                            print("--")
+                            telefono=None
                         
                     direccion = input("Dirección del empleado: ")
                     cargo = input("Cargo asignado: ")
@@ -179,7 +309,13 @@ def run(disqueria):
 
                 elif opcion == "7":
                     # Dar de baja empleado
-                    dni_empleado = int(input("Inserte el DNI del empleado: "))
+                    print("--")
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    print("--")
+                    try:
+                        dni_empleado = int(input("Inserte el DNI del empleado: "))
+                    except ValueError:
+                        print("Ingrese el DNI correctamente, Corroborelo y vuelva a ingresar.")
                     if disqueria.contiene_empleado(dni_empleado):
                         disqueria.eliminar_empleado(dni_empleado)
                         print("--")
@@ -191,35 +327,57 @@ def run(disqueria):
                         print("El empleado no existe.")
                         print("--")
 
-                elif opcion == "8":
-                    dni_e = int(input("Inserte el DNI del empleado a modificar: "))
-                    if disqueria.contiene_empleado(dni_e):
-                        nuevo_nombre = input("Nuevo nombre del empleado: ")
-                        nuevo_telefono = int(input("Nuevo telefono del empleado: "))
-                        nueva_direccion = (input("Nueva direccion del empleado: "))
-                        nuevo_cargo = input("Nuevo cargo del empleado: ")
-                        try:
-                            nuevo_telefono = int(input("Nuevo telefono del empleado: "))
-                            
-                        except ValueError:
-                            print("Error: Ingrese el valor correctamente, intentelo de nuevo")
-                            continue 
-                        
+                elif opcion == "8": #modificar empleado
+                    print("--")
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    print("--")
+                    try:
+                       dni_empleado = int(input("Inserte el DNI del empleado: "))
+                    except ValueError:
                         print("--")
-                        print(f"Se modificaron los valores anteriores del empleado con dni {dni_e}.")
+                        print("Error: Ingrese el DNI correctamente, Corroborelo y vuelva a ingresar")
                         print("--")
-
-                        empleado = disqueria.buscar_empleado2(dni_e) # buscar_empleado2() no imprime los valores. el que si lo hace es buscar_empleado()
-                
-                        empleado.nombre = nuevo_nombre
-                        empleado.telefono = nuevo_telefono
-                        empleado.direccion = nueva_direccion
-                        empleado.cargo = nuevo_cargo
+                        continue 
+                    print("--")
+                    print("Valores anteriores")
+                    print("--")
                         
+                    empleado = disqueria.buscar_empleado(dni_empleado)
+                    if disqueria.contiene_empleado(dni_empleado):
+                        modificar_nombre = input("¿Desea modificar el nombre del empleado? (S/N): ")
+                        if modificar_nombre.lower() == 's':
+                            nuevo_nombre = input("Nuevo nombre del empleado: ")
+                            empleado.nombre = nuevo_nombre
+                            print("--")
+                            print("NOTA: El telefono no tiene que tener simbolo + o separacion de puntos")
+                            print("--")
+                        
+                        modificar_tel = input("¿Desea modificar el telefono del empleado? (S/N): ")
+                        if modificar_tel.lower() == 's':
+                            nuevo_telefono= None
+                            while nuevo_telefono is None:
+                                try:
+                                    nuevo_telefono = int(input("Nuevo telefono del empleado: "))
+                                    empleado.telefono = nuevo_telefono
+                                except ValueError:
+                                    print("--")
+                                    print("Error: Ingrese el telefono correctamente, intentelo de nuevo")
+                                    print("--")
+                                    nuevo_telefono=None
+                        modificar_direccion = input("¿Desea modificar la dirección del empleado? (S/N): ")
+                        if modificar_direccion.lower() == 's':        
+                            nueva_direccion = (input("Nueva dirección del empleado: "))
+                            empleado.direccion = nueva_direccion
+                        
+                        modificar_cargo = input("¿Desea modificar el cargo del empleado? (S/N): ")
+                        if modificar_cargo.lower() == 's':
+                            nuevo_cargo = input("Nuevo cargo del empleado: ")
+                            empleado.cargo = nuevo_cargo
+                                   
                         print("Empleado modificado con éxito.")
                     else:
                         print("El empleado no está cargado en la disquería.")
-                    # Modificar empleado (pendiente)
+
 
                 elif opcion == "9":
                     # Buscar empleado
@@ -228,7 +386,7 @@ def run(disqueria):
                        dni_empleado = int(input("Insertar el DNI del empleado: "))
                     except ValueError:
                         print("--")
-                        print("Error: Ingrese el valor correctamente, intentelo de nuevo")
+                        print("Error: Ingrese el DNI correctamente, Corroborelo y vuelva a ingresar")
                         print("--")
                         continue 
                         
@@ -250,15 +408,39 @@ def run(disqueria):
 
                 elif opcion == "11":
                     # Venta de Album
-                    try:
-                        print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
-                        id_album = int(input("ID del álbum a vender: "))
+                    print("NOTA: El ID del album no contiene ninguna letra o caracter especial")
+                    id_album= None
+                    while id_album is None:
+                        try:
+                             id_album = int(input("ID del álbum a vender: "))
+                        except ValueError:
+                            print("--")
+                            print("Error: Ingrese el ID correctamente, intentelo de nuevo")
+                            print("--")
+                            id_album=None
+                    cantidad= None
+                    while cantidad is None:
+                        try:
+                            cantidad = int(input("Cantidad de unidades a vender: "))
+                        except ValueError:
+                            print("--")
+                            print("Ingrese los valores correctos")
+                            print("--")
+                            cantidad=None
+                    while cantidad <=0:
+                        print("NOTA: La cantidad de unidades a vender debe ser mayor a 0 ")
                         cantidad = int(input("Cantidad de unidades a vender: "))
-                        print("NOTA: El DNI no tiene que estar separado de puntos ")
-                        dni_empleado = int(input("DNI del empleado que realiza la venta: "))
-                    except ValueError:
-                        print("Ingrese los valores correctos")
-                        
+                    print("NOTA: El DNI no tiene que estar separado de puntos ")
+                    dni_empleado= None
+                    while dni_empleado is None:
+                        try:
+                            dni_empleado = int(input("DNI del empleado que realiza la venta: "))
+                        except ValueError:
+                            print("--")
+                            print("Error: Ingrese El DNI correctamente") 
+                            print("--")
+                            dni_empleado=None
+                           
                     album = disqueria.buscar_album2(id_album)
                     if not album:
                         print("--")
