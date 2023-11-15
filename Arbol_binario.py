@@ -1,5 +1,6 @@
 class ArbolBinarioBusqueda:
-
+    """
+    """
     def __init__(self):
         self.raiz = None
         self.tamano = 0
@@ -36,18 +37,19 @@ class ArbolBinarioBusqueda:
         else:
             return None
 
+### metodo original
 
-    def _obtener(self, clave, nodoActual):
+
+    def _obtener(self,clave,nodoActual):
         if not nodoActual:
             return None
-        elif clave == nodoActual.clave:
+        elif nodoActual.clave == clave:
             return nodoActual
-        elif type(clave) != type(nodoActual.clave):
-            return self._obtener(int(clave), nodoActual)
         elif clave < nodoActual.clave:
-            return self._obtener(clave, nodoActual.hijoIzquierdo)
+            return self._obtener(clave,nodoActual.hijoIzquierdo)
         else:
-            return self._obtener(clave, nodoActual.hijoDerecho)
+            return self._obtener(clave,nodoActual.hijoDerecho)    
+
 
     def __getitem__(self,clave):
         res = self.obtener(clave)
