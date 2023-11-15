@@ -47,3 +47,17 @@ print(empleado <= empleado2)
 print(empleado != empleado2)
 print(empleado > empleado2)
 print(empleado >= empleado2)
+
+#Test venta album
+album = Album("66", "Finisterra", "Mago de Oz", "Metal", "cd", 20, 30.0, 40.0)
+disqueria.alta_nuevo_album(album)
+empleado = Empleados("Jesus", 35331261, 4504828, "Av Siempreviva 1000", "vendedor")
+disqueria.alta_nuevo_empleado(empleado)
+#Venta
+cantidad_vendida = 5
+presupuesto_inicial = disqueria.presupuesto_disqueria
+disqueria.venta_album("66", cantidad_vendida, 35331261)
+#Verifica que el stock y el presupuesto se descuenten correctamente
+album_despues_venta = disqueria.buscar_album2("66")
+assert album_despues_venta.stock == 15  # 20 - 5
+assert disqueria.presupuesto_disqueria == presupuesto_inicial + (40.0 * cantidad_vendida)
