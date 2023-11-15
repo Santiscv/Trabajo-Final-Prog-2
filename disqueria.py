@@ -5,7 +5,7 @@ class Disqueria:
     def __init__(self):
         self.arbol_album = ArbolBinarioBusqueda()
         self.arbol_empleado = ArbolBinarioBusqueda()
-        self.presupuesto_disqueria = 0
+        self.presupuesto_disqueria = 10000
 
     def imprimir_presupuesto(disqueria):
         print(disqueria)
@@ -29,7 +29,7 @@ class Disqueria:
             album.stock -= cantidad
             
             self.presupuesto_disqueria += precio_venta_total
-            
+     
     def __len__(self):
         return len(self.arbol_album)
     
@@ -45,15 +45,13 @@ class Disqueria:
             return None
         
     def buscar_album2(self, id) -> "Album":
-        id = str(id)
-        if id in self.arbol_album:
-            album = self.arbol_album[id]
+        if self.arbol_album.obtener(id) != None:
+            album = self.arbol_album.obtener(id)
             return album
         else:
             return None
         
     def alta_nuevo_album(self, album):
-        self.presupuesto_disqueria -= album.precio_compra_tienda * album.stock
         self.arbol_album[album.id] = album
         
     def eliminar_album(self, id):
@@ -136,22 +134,34 @@ class Album:
         self.precio_venta_cliente = precio_venta
         self.dinero_en_caja = precio_venta - precio_compra
 
-    def __lt__(self, other):
+    def _lt_(self, other):
+        if other is None:
+            return False
         return self.nombre < other.nombre
-
-    def __le__(self, other):
+    
+    def _le_(self, other):
+        if other is None:
+            return False
         return self.nombre <= other.nombre
-
-    def __eq__(self, other):
+    
+    def _eq_(self, other):
+        if other is None:
+            return False
         return self.nombre == other.nombre
-
-    def __ne__(self, other):
+    
+    def _ne_(self, other):
+        if other is None:
+            return True
         return self.nombre != other.nombre
-
-    def __gt__(self, other):
+    
+    def _gt_(self, other):
+        if other is None:
+            return True
         return self.nombre > other.nombre
 
-    def __ge__(self, other):
+    def _ge_(self, other):
+        if other is None:
+            return True
         return self.nombre >= other.nombre
 
     def __str__(self):
@@ -186,5 +196,5 @@ class Empleados:
         return self.dni >= other.dni
 
     def __str__(self):
-        return "nombre: {0}\nDNI: {1}\nTelefono: {2}\nDireccion: {3}\nCargo: {4}\nDinero aportado: {5}" \
+        return "Nombre: {0}\nDNI: {1}\nTelefono: {2}\nDireccion: {3}\nCargo: {4}\nDinero aportado: {5}" \
             .format(self.nombre, self.dni, self.telefono, self.direccion, self.cargo, self.dinero_aportado)
