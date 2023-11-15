@@ -1,106 +1,99 @@
 # Título del Proyecto
+Hellfish management systems.
 
-_Acá va un párrafo que describa lo que es el proyecto_
+Hellfish es un sistema ABM pensado para tiendas de discos y creado para resolver problemas de administración de informacion. Permite cargar informacion de discos y empleados que pertenecen a la tienda. Lo hace através de clases que contienen arboles binarios de busqueda, cada clase tiene funcionalidades especificas para llevar a cabo el trabajo.
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+- Vas a necesitar estar logueado en el aula virtual de la tecnicatura.
+- dirigirte a la entrega final del trabajo integrador. 
+- descargar el archivo zip "Trabajo final disqueria".
+- descomprimir el archivo.
+- entrar en tu editor de codigo preferido.
+- abrir la carpeta descomprimida previamente en el editor.
+- ejecutar el programa.
+- disfrutar de la experiencia de hellfish management system.
 
-Mira **Deployment** para conocer como desplegar el proyecto.
 
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+Los requisitos necesarios son: 
+- computadora de escritorio o notebook
+- conexion a internet estable
+- editor de codigo
+- lenguaje python instalado
+- archivo de la disqueria
 
-```
-Da un ejemplo
-```
+
+
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+- descargar el archivo zip "Trabajo final disqueria".
+- descomprimir el archivo.
+- entrar en tu editor de codigo preferido.
+- abrir la carpeta descomprimida previamente en el editor.
+- ejecutar el programa.
+- disfrutar de la experiencia de hellfish management system.
 
-_Dí cómo será ese paso_
 
-```
-Da un ejemplo
-```
+Para obtener los datos del sistema cargados previamente a modo de demo deberas seguir los siguientes paasos:
+- Una vez ejecutado el programa y accedido al menu principal, deberas seleccionar la opcion 14 "leer archivo".
+- Luego de ejecutar esta opcion, el sistema ya habra cargado los datos de la version de prueba.
+- comenzar a probar las funcionalidades que provee el sistema.
 
-_Y repite_
-
-```
-hasta finalizar
-```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ## Ejecutando las pruebas ⚙️
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+- Se debe estar en el editor de codigo y abrir el archivo de la carpeta "trabajo final disqueria"
+- dirigirse al archivo "TEST.py" y ejecurtarlo.
 
-### Analice las pruebas end-to-end 🔩
+- Si la ejecucion de los testeos es exitosa, en la terminal deberá aparecer los siguiente:
+True
+True
+True
+True
+False
+False
 
-_Explica que verifican estas pruebas y por qué_
+- Por otra parte si la ejecucion de los testeos es fallida, en la terminal debera aparecer algun assertionError.
 
-```
-Da un ejemplo
-```
 
-### Y las pruebas de estilo de codificación ⌨️
 
-_Explica que verifican estas pruebas y por qué_
 
-```
-Da un ejemplo
-```
 
-## Despliegue 📦
 
-_Agrega notas adicionales sobre como hacer deploy_
 
-## Construido con 🛠️
+## Construido con 🛠️ python only 
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+herramientas ultilizadas:
+- VS Code
+- Github
+- Trello
+- Google meet
+- Python 3.10.7
 
-## Contribuyendo 🖇️
 
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
+## Versionado 📌 
+https://github.com/Santiscv/Trabajo-Final-Prog-2
 
-## Wiki 📖
+Usamos [Git] para el versionado. Para todas las versiones disponibles, accedé a https://github.com/Santiscv/Trabajo-Final-Prog-2
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+## Autores y colaboradores del proyecto:
+* **Marcos Monjes** https://github.com/Marcos-Monjes
+* **Santiago Carranza** https://github.com/Santiscv
+* **Mauricio Carrizo** https://github.com/mcarr91
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto es de libre uso y no está bajo ninguna Licencia, ya que fue creado con fines educativos.
 
 ## Expresiones de Gratitud 🎁
+### agradecimientos especiales a:
 
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* Dona con cripto a esta dirección: `0xf253fc233333078436d111175e5a76a649890000`
-* etc.
+* **Matias Bordone (Profesor)** por resolver nuestras consultas.
+* **Nicolas Dahlquist (Profesor ayudante)** por resolver nuestras consultas.
+* **[Villanuevand](https://github.com/Villanuevand)** por crear esta plantilla. 
 
-
-
----
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
